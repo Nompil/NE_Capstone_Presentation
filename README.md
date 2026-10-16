@@ -1,0 +1,159 @@
+# Imbokodo Risk and Compliance Workbench
+
+Presented by **Nompilo Eugenia Mchunu**. GitHub account: **Nompil**.
+
+The presentation follows `Imbokodo_Bank_Capstone_Presentation_Final.pptx` as its visual and narrative source. All 20 original main slides remain in their relative order. Two data evidence slides follow Solution Design and one integration evidence slide follows AWS Architecture, making 23 main slides, with the existing technical appendix retained. Imbokodo Bank branding, the fixed 1920 × 1080 canvas and WHY → WHAT → HOW → SHOW → LEARN → SCALE → CLOSE navigation remain.
+
+## Content placement
+
+- WHY covers the Prudential Authority context and Imbokodo Bank's Analyst challenges. No R2 mechanics or amount examples appear in these slides or their panels.
+- WHAT describes the original brief: CSV ingestion, validation, configured scoring, APIs, alerts and system operations.
+- HOW introduces R2 at the Score step. Rule points, the worked calculator and the R100,000 customer-context comparison remain optional details there.
+- SHOW explains what the Workbench adds: case ownership and deadlines, connected source evidence and review history, recorded decisions and specialist referrals. The following recovery slide covers controlled correction.
+- Use Imbokodo Risk and Compliance Workbench as the product name, with the Workbench as a short form. Original evidence, code identifiers, URLs, configuration keys and source filenames keep their authentic names.
+
+## AWS Region and architecture
+
+The selected Region is **AWS Africa (Cape Town), af-south-1**. This is the deployment location for the regional AWS workload, not a fourth application tier or a transaction-processing step.
+
+Explain the choice in **HOW, Three-Tier AWS Architecture**. Select **Why this Region?** beside the Region name for the short explanation.
+
+The **CPGL** checklist uses the course meanings below:
+
+- **C, Compliance:** consider data location, access and governance requirements. The capstone uses sample data. Choosing a South African Region does not establish compliance by itself.
+- **P, Proximity:** South African Analysts are the intended users, so Cape Town keeps the regional workload closer to them.
+- **G, Geography and geological risk:** assess geographic concentration, natural hazards and the recovery design. Availability Zones, backups and recovery options are relevant. The capstone's Single-AZ database is not a Multi-AZ resilience design.
+- **L, Latency:** a nearby Region can reduce network delay. The project has not recorded a measured comparison between Regions.
+
+**Application in this project:** compliance considerations and proximity are reflected in the design. Latency is a design aim. A documented geographic-risk comparison and latency measurements would complete the decision evidence. CPGL is a Region-selection checklist, separate from the AWS Well-Architected review.
+
+**FinOps is an additional check:** compare regional prices and required service availability within the US$10 monthly project budget. Cape Town is not presented as the cheapest Region.
+
+This choice relates to the Performance Efficiency, Security and Cost Optimization areas of the AWS Well-Architected Framework. It does not change the recorded review coverage: 11 Operational Excellence questions were completed in the supplied report.
+
+References: [AWS Region guidance](https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html) and [AWS Well-Architected Region cost guidance](https://docs.aws.amazon.com/wellarchitected/latest/framework/cost_pricing_model_region_cost.html).
+
+## Run locally
+
+Install Node.js 20 or newer, then run:
+
+```sh
+npm ci
+npm run dev
+```
+
+Use `npm run build` to create the static site in `dist/`, or `npm run preview` to preview that production build locally.
+
+## Presentation controls
+
+- The chapter strip beneath the toolbar jumps to each story group; its active indicator tracks progress within that group.
+- Assignment, contribution, foundation, testing, security and skills cards open contextual evidence panels. Workflow steps are also clickable.
+- The scenario preserves the Imbokodo Bank introduction and prominently links the South African Prudential Authority statement. R2 rules and the R100,000 customer-context example belong in HOW, through the Score step. They are not shown on the opening scenario slide or its panels.
+- On the scenario slide, select any of the three problem cards to open its detailed explanation; close it with **×**, click outside, or press `Escape`.
+- On the cover, select a story-stage label to jump directly to that chapter.
+- Standard slides repeat the Imbokodo Bank logo and Risk & Compliance Workbench wordmark in the upper-left, matching the supplied slide references.
+- On **Business Analysis: Starting With the Problem**, use the Use Case, Activity and Wireframe tabs. Each diagram opens in a zoomable evidence viewer.
+- On **What Makes the Solution Different**, select any of the three question cards to inspect its real application screenshot in a detail panel.
+- On **A8 · Risk Scoring Rules**, select the example row to try amount bands and additional signals. The calculation uses the frozen R2 defaults; it does not query the live application or create an assessment.
+- **Three-Tier AWS Architecture** identifies the presentation, application and data layers above the business flow. **AWS services** adds the implementation names. Select a stage for its plain-English meaning and purpose; **Detailed diagram** retains the original PowerPoint evidence unchanged.
+- Testing shows 1,026 recorded Linux candidate tests passed, verified against the saved JUnit report and its SHA-256 hash. AWS transport was disabled. This is not a new run or proof of live cloud readiness. The historical milestone chart remains inside the detail panel; its values are not additive totals.
+- **Terms** opens an optional 16-term plain-English reference. It adds no main slide.
+- The SHOW demonstration button opens A19, with a seven-step memory cue and deeper presenter speaking cues, recovery and authentic fallback evidence.
+- On **A16 · Application and Design Evidence**, select a screenshot to open a larger view; these are existing project assets.
+- **Present / Browse** switches between one-slide presentation mode and a scrollable overview.
+- **Index** opens the chapter list; **Q&A**, **Architecture**, and **Evidence** open quick-access panels.
+- **Open Workbench** opens the local demo at `http://127.0.0.1:5001/release1` in a new tab. The demo itself must be running locally.
+- Fullscreen can be entered or exited with the toolbar button or `Escape`.
+- `←` / `→`, `Space` / `Shift+Space`, `Home`, and `End` move through the deck.
+- `A`, `C`, `S`, `T`, and `R` jump to Architecture, FinOps, Security, Testing, and Roadmap.
+- `D` opens the local demo; `Q` opens Q&A; `E` opens Evidence.
+- Keyboard controls are ignored while typing in a form field or editable content. Space activates focused buttons and disclosure controls instead of advancing the presentation.
+- Slide and menu transitions use subtle motion and follow the device's reduced-motion preference.
+
+Evidence dialogs open outside the scaled slide canvas, support keyboard closing and focus return, and keep background controls inactive. The evidence drawer navigates to bundled evidence. File-preparation reminders are kept outside the audience presentation.
+
+## Presenter voice
+
+The presentation uses a balanced voice: first person for the introduction, a few personal decisions and speaking cues; clear, direct statements elsewhere. Avoid repetitive I openings and narration about Nompilo in the third person. Technical explanations stay plain while preserving service names, source code, thresholds and current-versus-future distinctions. File reminders belong in separate presenter notes. The original three-screen **What Makes the Solution Different** slide remains at main slide 13.
+
+## Visual cues
+
+The presentation uses local, code-native line icons for concepts such as upload, validation, scoring, storage, investigation and audit. Stronger SVG arrows connect workflows, the three logical tiers, screenshot stories and roadmap stages. Existing project screenshots provide the picture evidence. `VisualIcons.jsx` supplies the shared decorative icons and connectors, which stay out of accessible control names. No external icon service or new dependency is required.
+
+Icon colours follow purpose: blue for systems, indigo for data, gold for risk and cost, purple for investigation and people, coral for alerts and errors, navy for security and audit, and teal for successful validation. Neutral operations use slate; sustainability uses a muted leaf green. The shared palette and badge treatments live in `visuals.css`.
+
+## Evidence provenance and gaps
+
+### Final presentation evidence and console access
+
+Technical Integration, slide 11, uses supplied capture 08 as its main image. Captures 05 and 07 open from discreet request and response controls beside it. The existing Frontend → API → SQL detail panel also presents captures 05, 07 and 08 in that order before the retained source walkthrough. Supplied capture 06 appears only in A16, Application and Design Evidence, with an appendix link from the integration slide and Q&A access.
+
+These images are authentic supplied captures. HTTP 200 establishes successful responses in the captured session, not cloud deployment or SQL execution. JSON fields remain as captured, including missing metadata. The risk capture's 70% badge has no visible rule version, so it is not attributed to current R2 scoring. A matching record ID between the selected response and a particular visible risk row is not claimed. The wireframe screenshot is cropped to its design area to remove surrounding browser toolbars and editor panels. Its retained design pixels are unchanged. Other screenshots are unmodified.
+
+Business Analysis includes the supplied Figma Analyst Investigation wireframe alongside the Use Case and Activity Diagrams. The comparison panel now uses that actual wireframe rather than a reconstruction. The supplied core ERD occupies the separate SQL & Data Modelling slide after Solution Design, followed by SQL Evidence & Data Layer, then AWS Architecture. The ERD is labelled as a conceptual presentation model because its identifier types and table names differ from the repository schema. The implementation ERD remains available for comparison.
+
+The file supplied as `03_SQL_Transaction_Risk_Query.png` actually shows the Solution Design presentation slide. It is not displayed as SQL evidence. The SQL slide uses actual repository source while an authentic query/result screenshot remains outstanding.
+
+Local presenter access is configured in ignored `.env.local` through `VITE_FINTRUST_AWS_CONSOLE_URL`. The console control appears beside Explore Lambda functions, on AWS Architecture and in the Lambda detail panel. It opens the provided account sign-in page in a new tab. The detail panel also links to Lambda in Africa (Cape Town), `af-south-1`. Authentication remains entirely with AWS; credentials are not stored in the presentation. The presenter signs in privately before the session and demonstrates only resources visible as deployed.
+
+Console access is deliberately limited to the local Vite development presentation. Production builds remove the console controls and account-specific URL from client JavaScript. `.env.local` must not be committed or copied to a public host. A static public presentation does not provide a backend or authenticate into AWS.
+
+- Solution Design retains **Receive → Validate → Score → Store → Investigate → Prove** and all three technical Q&A buttons. A clickable HIGH-risk-only branch leaves Store for Alert Lambda, SES and the Analyst/Risk team, with a separate delivery-failure queue/CloudWatch/Maintainer line. It opens the detailed alert panel. The persisted risk event remains the source of truth.
+
+- The Scenario slide leads with the Prudential Authority statement and source, then connects it to Imbokodo Bank's Analyst workload, mistakes and urgent events that can be overlooked. Its panels stay with business needs. R2 rules, amount examples and notification mechanics belong in HOW, not WHY.
+- The manual-review detail panel follows the same order: Prudential Authority context, Imbokodo Bank's specific challenges, then the Workbench response. It covers manual workload, mistakes, overlooked events, fragmented evidence, competing priorities and decision traceability. The Analyst retains decision ownership; source links and the regulatory disclaimer remain.
+- Business Analysis now includes the original **Workbench Use Case Diagram** alongside the retained Activity Diagram in keyboard-accessible tabs. Both expand with zoom. The unmodified use-case PDF is available to view/download here and in Project Documents. Its 12 October 2026 planning/design provenance and independent role boundaries are explicit.
+
+- **A18 · From Analyst Need to Working System** adds eight clickable walkthroughs: frontend/API/backend, SQL, Lambda/Python, R2 scoring, alerts, wireframe comparison, live-demo sequence and project documents. Access it from **Evidence** or **Q&A**.
+- **A19 · Live System Demonstration** provides a dedicated presenter slide with the three demo flows, local application link, real fallback evidence and a return-to-SHOW control, without renumbering the main deck.
+- Main-slide entry points are retained within the existing design: Business Analysis opens the wireframe comparison; Solution Design opens API, Lambda and SQL evidence; AWS Architecture opens the independent alert path; the application slide opens the live-demo sequence; Well-Architected opens real documents.
+- `public/resources/` contains the supplied SOP PowerPoint, a slide-image PDF preview, the project-plan PDF, a public sharing copy of the Well-Architected report, authentic SOP screenshots, the project ERD, and actual source excerpts. The SOP PDF preview is a derivative, not a replacement SOP. The public Well-Architected copy has account and contact details removed. The untouched original stays outside the public repository and web build. The local `private-evidence/` folder is ignored by Git.
+- SQL tabs show repository source, not executed query results. Implementation tabs show real Python functions and the frontend request helper; deployment status remains separate. The Workbench uses JavaScript; React/Vite powers this presentation.
+- Alert evidence distinguishes the persisted risk/review record, delivery claim and SES acceptance. UNKNOWN/SENDING requires reconciliation; email is not the audit trail, and provider acceptance is not inbox delivery.
+- The supplied Figma wireframe replaces the earlier reconstruction. The presenter can demonstrate current Lambda deployment in the local console walkthrough. SQL execution results, matching API/Network evidence and SES delivery evidence require authentic captures or live demonstration.
+- A publication check found account and contact details in the Well-Architected report. They have been removed from the public download copy. Text checks of the public PDFs and SOP PowerPoint found no remaining email addresses or 12-digit account identifiers. These checks do not replace a final visual privacy review. Changes to the presentation do not deploy AWS resources.
+
+- `image-6-1.png` is the original activity model. Its proportions are preserved.
+- `image-8-1.png` is the original architecture evidence. It describes the design; it does not prove deployment status.
+- `image-10-1.png` shows the Imbokodo Bank overview. `image-10-2.png` and `image-10-3.png` show historical V1 investigation evidence and are labelled accordingly in their detail views.
+- `image-11-1.png` and `image-11-2.png` show quarantine reason, source lineage, correction history and audit evidence.
+- `r2-score-evidence.png` and `r2-velocity-evidence.png` are real captures from the project's isolated PostgreSQL R2 verification with AWS mocked, before the bank branding update. They are labelled and appear in detail/appendix views.
+- A current Imbokodo-branded R2 component capture and live budget/alarm screenshots were not supplied with the deck. Existing captures and source-deck budget figures are used without claiming new live evidence.
+- `fintrust_presentation_demo_scenarios.csv` was mentioned in the previous chat but is not present in the presentation workspace or the matching Downloads search. Its original contents have not been recreated or substituted.
+
+R2 uses deterministic amount bands, cross-border, velocity and duplicate signals. It consults transaction history for its configured velocity and duplicate checks. Customer-specific behavioural baselining remains future context and is not described as implemented.
+
+## External references
+
+The scenario slide visibly cites South African Reserve Bank Prudential Authority AML/CFT guidance and supplied banking-sector risk material. Both are listed with clickable source links in the final technical appendix, **A17 · Sources & References**. These external sources support the real-world banking context only; Imbokodo Risk and Compliance Workbench's architecture, deterministic scoring rules and workflows are capstone design choices, not regulatory requirements.
+
+## Profile photo
+
+The About Me slide uses `public/assets/profile.jpg` for the presenter portrait. Replace that file with your own photo to update it; if the image is unavailable, the slide falls back to the initials placeholder.
+
+## GitHub Pages publication
+
+The presentation repository is `Nompil/NE_Capstone_Presentation`, with `main` as its publishing branch. The presenter has approved making the clean presentation source public and hosting the slides with GitHub Pages. Anyone can view the public source, slides and bundled downloads. The panel does not need to sign in.
+
+GitHub Pages address: [Open the Imbokodo Bank presentation](https://nompil.github.io/NE_Capstone_Presentation/).
+
+The original unredacted report, local AWS console configuration and credentials must remain private. They are excluded from both the public repository and its history. The previous hosting service is no longer used for public access.
+
+The Pages workflow builds with `/NE_Capstone_Presentation/` as Vite's base path and uploads a build artifact. Set the repository variable `PUBLISH_PAGES` to `true` to enable its deployment job. GitHub Pages uses **GitHub Actions** as its publishing source. Future approved pushes to `main` rebuild and update the website automatically.
+
+Publication sequence:
+
+1. Review source, documents, screenshots and repository history for material that must remain private.
+2. Add only approved source, evidence and the lockfile. Exclude environment files, credentials, `node_modules/`, `dist/` and `private-evidence/`.
+3. Push the clean presentation to `main` in `Nompil/NE_Capstone_Presentation` and apply the approved public visibility.
+4. Select GitHub Actions as the Pages publishing source and set `PUBLISH_PAGES=true`.
+5. Run the deployment workflow. Wait for the build and deployment to succeed before sharing the website address.
+6. Check slide navigation, screenshots, evidence panels, PDF downloads and external links on the hosted version.
+
+GitHub Pages hosts the presentation's static files. It does not run the Python backend or deploy the Workbench's AWS resources. The local application demonstration still requires the Workbench to be running on the presenter's computer. The AWS workload Region remains af-south-1; GitHub Pages is a separate hosting service.
+
+A matching PDF edition of this guide is bundled as `public/resources/workbench-readme.pdf` and is available through Project Documents in the technical appendix.
+
+References: [What GitHub Pages hosts](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) and [GitHub Pages custom workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
+
+The presentation currently reports only the implementation and verification evidence included in its source content; deployment and live AWS service status are not asserted by the website.

@@ -1,0 +1,29 @@
+{
+  "scope": "Recorded offline Linux candidate verification. Not a new run or live cloud end-to-end proof.",
+  "candidate_commit": "66b798ffd6d969b70ab5dc1fa48a1412606b2b69",
+  "source_summary": "docs/EVIDENCE/12-e2e/cognito-auth-candidate/verification.json",
+  "source_junit": "docs/EVIDENCE/12-e2e/cognito-auth-candidate/linux-full-regression.xml",
+  "verified_junit_sha256": "ab86c3e8fec9a3138bf2a32e066ce2151384f50be4a0f3ab5a44a925c9882c5c",
+  "tests": 1026,
+  "passed": 1026,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "junit_seconds": 419.303,
+  "environment": {
+    "platform": "Ubuntu 24.04 Linux x86_64",
+    "python": "CPython 3.12.3",
+    "postgresql": "16.15",
+    "database": "Disposable loopback-only test database",
+    "aws_transport": "Disabled in regression harness"
+  },
+  "separate_focused_runs_not_additive": {
+    "cognito_claims_roles_and_gateway_routes_passed": 48,
+    "linux_infrastructure_auth_contracts_passed": 98
+  },
+  "outstanding_in_source_evidence": [
+    "Private RDS catalog/migration state and runtime grants require approved preflight",
+    "Deployment permissions and migration operator require review",
+    "No AWS CloudFormation validation, change set, Cognito sign-in or live end-to-end test was run"
+  ]
+}

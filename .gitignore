@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.vite/
+.DS_Store
+Thumbs.db
+*.local
+.env
+.env.*
+!.env.example
+private-evidence/
+.env
+.env.*
+!.env.example
+private-evidence/
