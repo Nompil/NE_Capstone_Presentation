@@ -25,3 +25,8 @@ export const regulatoryReferences = [
     url: 'https://www.resbank.co.za/content/dam/sarb/publications/prudential-authority/pa-public-awareness/sra/banks.pdf'
   }
 ];
+
+export const analystWireframeSource = {
+  url: 'https://www.figma.com/design/FU25bSAUKvAZ00a3iLi11C/Untitled?node-id=0-1&t=zO9aeD9gDAeLBhfl-1',
+  label: 'Open my Figma wireframe'
+};

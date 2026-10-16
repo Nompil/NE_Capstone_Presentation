@@ -5,6 +5,7 @@ import AwsConsoleLink from './AwsConsoleLink.jsx';
 import { DataModelSlide, IntegrationSlide, SqlBuildSlide } from './BuildEvidence.jsx';
 import { ArchitectureWalkthrough, VerificationSummary } from './PresentationPolish.jsx';
 import { FlowArrow, IconBadge, VisualIcon, iconForLabel } from './VisualIcons.jsx';
+import { analystWireframeSource } from '../data/references.js';
 
 function PageMarker({ slide, number, total, appendixTotal, logoSrc }) {
   const appendixNumber = slide.appendix?.slice(1).padStart(2, '0');
@@ -431,7 +432,7 @@ function BusinessAnalysisEvidence({ slide, assetBase, active }) {
   const diagrams = [
     { id: 'use-case', label: 'Use Case', title: 'Use Case Diagram', src: 'fintrust-use-case.png', base: resourceBase, alt: 'Imbokodo Risk and Compliance Workbench Use Case Diagram', caption: 'My Use Case Diagram maps the Analyst, Administrator, Auditor and Maintainer roles.', description: 'Who does what: investigate, manage access, read audit records or recover failed work.' },
     { id: 'activity', label: 'Activity', title: 'Activity Diagram', src: slide.diagram, base: assetBase, alt: 'Activity Diagram', caption: slide.proof, description: slide.proof },
-    { id: 'wireframe', label: 'Wireframe', title: 'Analyst Investigation Wireframe', src: 'analyst-wireframe.png', base: resourceBase, alt: 'Supplied Figma Analyst Investigation wireframe', caption: 'The Figma wireframe shows the planned investigation layout.', description: 'Transaction details, risk reasons, notes and history support investigation in one place.' }
+    { id: 'wireframe', label: 'Wireframe', title: 'Analyst Investigation Wireframe', src: 'analyst-wireframe.png', base: resourceBase, alt: 'Supplied Figma Analyst Investigation wireframe', caption: 'The Figma wireframe shows the planned investigation layout.', description: 'Transaction details, risk reasons, notes and history support investigation in one place.', source: analystWireframeSource }
   ];
   const current = diagrams.find((diagram) => diagram.id === selected);
   const handleTabKeyDown = (event) => {
@@ -449,10 +450,11 @@ function BusinessAnalysisEvidence({ slide, assetBase, active }) {
       {diagrams.map((diagram) => <button key={diagram.id} type="button" role="tab" id={`${diagram.id}-tab`} aria-controls="analysis-diagram-panel" aria-selected={selected === diagram.id} tabIndex={selected === diagram.id ? 0 : -1} onClick={() => setSelected(diagram.id)}>{diagram.label}</button>)}
     </div>
     <div className="analysis-diagram-panel" id="analysis-diagram-panel" role="tabpanel" aria-labelledby={`${selected}-tab`}>
-      <EvidenceImage key={current.id} src={current.src} alt={current.alt} caption={current.caption} label={`Expand ${current.title}`} className="activity-source-image" assetBase={current.base} active={active} />
+      <EvidenceImage key={current.id} src={current.src} alt={current.alt} caption={current.caption} label={`Expand ${current.title}`} className="activity-source-image" assetBase={current.base} active={active} sourceUrl={current.source?.url} sourceLabel={current.source?.label} />
     </div>
     <p>{current.description}</p>
     {selected === 'use-case' && <div className="use-case-document-links"><a href={`${resourceBase}fintrust-use-case.pdf`} target="_blank" rel="noopener noreferrer">View original PDF ↗</a><a href={`${resourceBase}fintrust-use-case.pdf`} download>Download PDF ↓</a></div>}
+    {current.source && <div className="use-case-document-links"><a href={current.source.url} target="_blank" rel="noopener noreferrer">{current.source.label} ↗</a></div>}
   </>;
 }
 

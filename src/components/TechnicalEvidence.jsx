@@ -3,6 +3,7 @@ import { DetailDialog, EvidenceImage, RiskScoringSummary } from './Evidence.jsx'
 import AwsConsoleLink from './AwsConsoleLink.jsx';
 import { IntegrationCaptureSequence } from './IntegrationCaptures.jsx';
 import { FlowArrow, VisualIcon } from './VisualIcons.jsx';
+import { analystWireframeSource } from '../data/references.js';
 
 const resourceBase = `${import.meta.env.BASE_URL}resources/`;
 const topics = [
@@ -86,7 +87,7 @@ function Journey({ active }) {
 }
 
 function Wireframe({ active }) {
-  return <><p className="technical-lead">The investigation screen brings together what an Analyst needs: the transaction, the risk reasons, a place for notes and the case history.</p><div className="technical-split"><EvidenceImage src="analyst-wireframe.png" assetBase={resourceBase} alt="Analyst Investigation wireframe" caption="My Figma wireframe shows the planned layout and investigation actions." label="Expand wireframe" active={active} /><EvidenceImage src="sop-screen-7.png" assetBase={resourceBase} alt="Imbokodo Bank investigation screen" caption="The investigation screen in my Analyst SOP shows how the design became a working screen." active={active} /></div><div className="technical-three"><article><h3>Understand the transaction</h3><p>Account, amount and country appear with the saved score.</p></article><article><h3>Make a decision</h3><p>The Analyst checks the reasons, adds notes and chooses the outcome.</p></article><article><h3>Keep the history</h3><p>The timeline records what happened and who took action.</p></article></div><p className="technical-caption">My Use Case and Activity diagrams are also available on the Business Analysis slide.</p></>;
+  return <><p className="technical-lead">The investigation screen brings together what an Analyst needs: the transaction, the risk reasons, a place for notes and the case history.</p><div className="use-case-document-links"><a href={analystWireframeSource.url} target="_blank" rel="noopener noreferrer">{analystWireframeSource.label} ↗</a></div><div className="technical-split"><EvidenceImage src="analyst-wireframe.png" assetBase={resourceBase} alt="Analyst Investigation wireframe" caption="My Figma wireframe shows the planned layout and investigation actions." label="Expand wireframe" active={active} sourceUrl={analystWireframeSource.url} sourceLabel={analystWireframeSource.label} /><EvidenceImage src="sop-screen-7.png" assetBase={resourceBase} alt="Imbokodo Bank investigation screen" caption="The investigation screen in my Analyst SOP shows how the design became a working screen." active={active} /></div><div className="technical-three"><article><h3>Understand the transaction</h3><p>Account, amount and country appear with the saved score.</p></article><article><h3>Make a decision</h3><p>The Analyst checks the reasons, adds notes and chooses the outcome.</p></article><article><h3>Keep the history</h3><p>The timeline records what happened and who took action.</p></article></div><p className="technical-caption">My Use Case and Activity diagrams are also available on the Business Analysis slide.</p></>;
 }
 
 function Demo({ active }) {

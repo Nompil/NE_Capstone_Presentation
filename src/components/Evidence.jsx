@@ -57,7 +57,7 @@ export function DetailDialog({ title, kicker, onClose, children, className = '' 
   );
 }
 
-export function EvidenceImage({ src, alt, caption, assetBase, className = '', label = 'View full evidence', active = true }) {
+export function EvidenceImage({ src, alt, caption, assetBase, className = '', label = 'View full evidence', active = true, sourceUrl, sourceLabel = 'View source' }) {
   const [open, setOpen] = useState(false);
   const [zoom, setZoom] = useState(100);
   const [fittedWidth, setFittedWidth] = useState(0);
@@ -92,6 +92,7 @@ export function EvidenceImage({ src, alt, caption, assetBase, className = '', la
           <button type="button" disabled={zoom >= 250} onClick={() => setZoom((value) => Math.min(250, value + 25))} aria-label="Zoom in">+</button>
           <button type="button" onClick={() => setZoom(100)}>Fit</button>
           <a href={`${assetBase}${src}`} target="_blank" rel="noopener noreferrer">Open original ↗</a>
+          {sourceUrl && <a href={sourceUrl} target="_blank" rel="noopener noreferrer">{sourceLabel} ↗</a>}
         </div>
         <div className="full-evidence-image" ref={frameRef}><img src={`${assetBase}${src}`} alt={alt} ref={imageRef} onLoad={updateFit} style={{ width: fittedWidth ? `${fittedWidth * zoom / 100}px` : 'auto' }} /></div>
         <p className="evidence-caption">{caption}</p>
