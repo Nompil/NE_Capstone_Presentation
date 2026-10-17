@@ -331,20 +331,20 @@ const slideContent = [
   },
   {
     id: 'delivery',
-    title: 'Project Coordination and Delivery',
-    subtitle: 'Clear stages make the work easier to build, test and improve step by step.',
+    title: 'SDLC: From Requirements to Operation',
+    subtitle: 'The Software Development Life Cycle guides how the cloud solution is built and improved.',
     group: 'LEARN',
-    badge: 'ROLE: PROJECT COORDINATION',
+    badge: 'PROJECT DELIVERY',
     type: 'delivery',
     steps: [
-      { title: 'Understand', body: 'Brief, requirements, scope' },
+      { title: 'Requirements', body: 'Analyst needs, roles and scope' },
       { title: 'Design', body: 'Architecture, data, security, cost' },
-      { title: 'Build', body: 'Python, SQL, APIs, workflows' },
-      { title: 'Verify', body: 'Tests, Linux, browser evidence' },
-      { title: 'Deploy', body: 'Controlled AWS stages' },
-      { title: 'Present', body: 'SOP, evidence, lessons learned' }
+      { title: 'Develop', body: 'Python, SQL, APIs and screens' },
+      { title: 'Test', body: 'Rules, access and failure paths' },
+      { title: 'Deploy', body: 'AWS configuration, permissions and quota checks' },
+      { title: 'Operate', body: 'Logs, recovery, costs and improvements' }
     ],
-    takeaway: 'Tasks, dependencies, decisions and test results make progress and next steps visible.'
+    takeaway: 'Testing and operational feedback lead back to requirements and design. The cycle continues after deployment.'
   },
   {
     id: 'lessons',

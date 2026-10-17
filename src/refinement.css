@@ -115,6 +115,10 @@
 .integration-story > span, .integration-story strong { color: #315e7e; }
 .integration-provenance { font-size: 21px; }
 .slide-canvas--delivery .process-row { top: 340px; }
+.sdlc-introduction { position: absolute; top: 270px; left: 118px; right: 118px; margin: 0; font-size: 30px; color: #315c77; }
+.slide-canvas--delivery .process-card { min-height: 300px; height: 300px; }
+.slide-canvas--delivery .process-card h3 { font-size: 28px; }
+.slide-canvas--delivery .process-card p { font-size: 24px; line-height: 1.4; }
 .slide-canvas--delivery .slide-takeaway { bottom: 170px; font-size: 30px; padding: 30px 0; border: 0; border-top: 2px solid #b99b50; background: transparent; }
 @media (prefers-reduced-motion: reduce) { .audience-controls { transition: none; } }
 @media (max-width: 850px) { .editorial-detail-list { grid-template-columns: 1fr; } }

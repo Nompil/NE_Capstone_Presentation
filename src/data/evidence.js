@@ -39,6 +39,10 @@ export const evidenceDetails = {
 };
 
 export const flowDetails = {
+  Requirements: 'Start with the Analyst’s workload, user roles, investigation needs and the project boundaries. These requirements guide the wireframe and acceptance checks.',
+  Develop: 'Connect Python business rules, SQL records, backend APIs and the Analyst screens. Keep changes controlled so each part can be checked.',
+  Test: 'Check normal activity, bad data, scoring, access boundaries and recovery. The saved test report and application captures support the verification story.',
+  Operate: 'Use logs and monitoring to investigate errors, manage cost and recover failed work. Update the SOP and requirements when operational feedback identifies a change.',
   Receive: 'Receive a controlled CSV and preserve the original source identity. A successful upload is the beginning of the workflow.',
   Validate: 'File checks come first, followed by row checks. An invalid file is rejected. A bad row is separated with its error reason and original input.',
   Score: 'R2 is the Workbench’s current scoring version. After validation, four fixed checks add points to set the review priority.',
@@ -49,7 +53,7 @@ export const flowDetails = {
   Design: 'Model the activity, data and failure paths; evaluate service choices against security and cost.',
   Build: 'Implement application logic, data structures, APIs and user workflows in controlled increments.',
   Verify: 'Exercise expected and failure paths, verify access boundaries and capture the actual Analyst journey.',
-  Deploy: 'Staged cloud changes include permission, configuration and result checks at each step.',
+  Deploy: 'Check the selected AWS Region, permissions, configuration and service quotas before releasing each component. A quota restriction must be resolved and the affected deployment checked before that component can be described as complete.',
   Present: 'Connect the bank’s problem to the working system, lessons learned and next improvements.',
   'Invalid row': 'Validation identifies a specific row issue. The original input and its source row remain traceable.',
   Quarantine: 'Invalid rows stay separate from accepted transactions, with the error reason and original input.',

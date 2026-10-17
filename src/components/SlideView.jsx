@@ -481,14 +481,13 @@ function ProfilePortrait({ src }) {
   const [available, setAvailable] = useState(true);
 
   return (
-    <div className="profile-card" aria-label={available ? 'Presenter portrait' : 'Presenter portrait placeholder'}>
+    <div className="profile-card" aria-label={available ? 'Presenter portrait' : 'Presenter initials'}>
       {available ? (
         <img className="profile-photo" src={src} alt="Nompilo Eugenia Mchunu" onError={() => setAvailable(false)} />
       ) : (
         <>
           <div className="profile-monogram">NM</div>
-          <span>PORTRAIT</span>
-          <small>Presenter portrait: public/assets/profile.jpg</small>
+          <span>Nompilo Eugenia Mchunu</span>
         </>
       )}
     </div>
@@ -650,6 +649,7 @@ function SlideBody({ slide, logoSrc, profileSrc, assetBase, onNavigate, qaItems,
     case 'delivery':
       return (
         <>
+          {slide.type === 'delivery' && <p className="sdlc-introduction">Cloud provides the platform. SDLC provides the delivery process.</p>}
           <ProcessRow steps={slide.steps} className={slide.type === 'delivery' ? 'process-row--six' : ''} active={active} assetBase={assetBase} />
           {slide.id === 'solution-design' && <>
             <svg className="solution-alert-connector" viewBox="0 0 1920 60" aria-hidden="true"><path d="M1085 0 V25 H650 V42" /><path d="M643 34 L650 42 L657 34" /></svg>

@@ -38,6 +38,7 @@ const labelIcons = {
   INGEST: 'upload', VALIDATE: 'check', SCORE: 'score', 'API ACCESS': 'link', ALERTS: 'bell', INVESTIGATE: 'search', REPORT: 'report', OPERATE: 'settings',
   Receive: 'upload', Validate: 'check', Score: 'score', Store: 'database', Investigate: 'search', Prove: 'audit',
   Understand: 'users', Design: 'plan', Build: 'code', Verify: 'check', Deploy: 'cloud', Present: 'screen',
+  Requirements: 'users', Develop: 'code', Test: 'check', Operate: 'settings',
   'Invalid row': 'alert', Quarantine: 'shield', 'Analyst action': 'users', Revalidation: 'retry', Queue: 'queue',
   'Business Analysis': 'users', 'Solution Design': 'plan', 'Development & Data': 'code', 'Testing & QA': 'check',
   'Cloud Engineering': 'cloud', 'FinOps & Governance': 'cost', 'Project Coordination': 'plan', 'Security & Operations': 'shield',

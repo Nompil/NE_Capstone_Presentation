@@ -189,9 +189,7 @@ function Panel({ type, onClose, onNavigate, setAnnouncement, assetBase }) {
                       }}>Open evidence</button>
                     ) : evidence.asset ? (
                       <a className="evidence-action" href={`${assetBase}${evidence.asset}`} target="_blank" rel="noopener noreferrer">View image</a>
-                    ) : (
-                      <small>File needed</small>
-                    )}
+                    ) : null}
                   </div>
                 ))}
               </div>

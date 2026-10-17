@@ -79,6 +79,8 @@ The presentation uses a balanced voice: first person for the introduction, a few
 
 ## Suggested presentation route
 
+Slide 19 explicitly maps the Software Development Life Cycle to requirements, design, development, testing, deployment and operations. Its deployment detail covers regional configuration, permissions and quota checks. Cloud is the platform, while SDLC is the delivery process. A service quota restriction is not a verified resolution until the affected deployment succeeds. Final presenter cue cards should follow the confirmed challenge and resolution record.
+
 Keep the main story linear. Open the Score calculation in HOW, the original Figma wireframe in Business Analysis, and the AWS Console at Architecture when needed. In SHOW, select the three investigation stages and inspect the evidence that supports each added capability. Use the live demonstration entry for the working Analyst journey. Keep the remaining appendix material for questions. The SQL slide shows labelled source excerpts and the expected output shape, not an invented query result. The US$10 figure is a budget limit rather than actual spend.
 
 ## Visual cues
@@ -134,7 +136,7 @@ The scenario slide visibly cites South African Reserve Bank Prudential Authority
 
 ## Profile photo
 
-The About Me slide uses `public/assets/profile.jpg` for the presenter portrait. Replace that file with your own photo to update it; if the image is unavailable, the slide falls back to the initials placeholder.
+The About Me slide uses the supplied presenter portrait at `public/assets/profile.jpg`. A portrait loading error falls back to the presenter’s initials and name without file preparation instructions on the slide.
 
 ## GitHub Pages publication
 
