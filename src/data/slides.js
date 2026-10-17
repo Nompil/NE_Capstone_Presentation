@@ -1,6 +1,6 @@
 import { regulatoryReferences } from './references.js';
 
-export const mainSlides = [
+const slideContent = [
   {
     id: 'cover',
     title: 'IMBOKODO BANK',
@@ -95,8 +95,8 @@ export const mainSlides = [
   },
   {
     id: 'disciplines',
-    title: 'One Project, Multiple Disciplines',
-    subtitle: 'One project spanning business needs, cloud design, development, testing and delivery.',
+    title: 'My Role Across the Project',
+    subtitle: 'From understanding the Analyst’s problem to delivering a working investigation flow.',
     group: 'WHAT',
     badge: 'MY CONTRIBUTION',
     type: 'discipline-grid',
@@ -139,7 +139,7 @@ export const mainSlides = [
     steps: [
       { title: 'Receive', body: 'Controlled transaction file' },
       { title: 'Validate', body: 'Reject bad files; quarantine bad rows' },
-      { title: 'Score', body: 'R2 rule points set the review priority', cue: 'How R2 scoring works ↗' },
+      { title: 'Score', body: 'R2 adds rule points. HIGH starts at 40.', cue: 'Open the score calculation ↗' },
       { title: 'Store', body: 'Save transactions, scores and risk records' },
       { title: 'Investigate', body: 'Review evidence, assign work and record a decision' },
       { title: 'Prove', body: 'Audit trail, reports and outcomes' }
@@ -301,7 +301,7 @@ export const mainSlides = [
     badge: 'ROLE: FINOPS',
     type: 'finops',
     budget: 'US$10',
-    budgetLabel: 'monthly project budget',
+    budgetLabel: 'monthly budget limit',
     alerts: ['50%', '80%', '100% actual', '100% forecast'],
     decisions: [
       'Avoid extra networking services that add standing monthly costs.',
@@ -310,7 +310,7 @@ export const mainSlides = [
       'Keep the setup lean without an extra database proxy or duplicate environments.',
       'Add resources in stages and check cost before expanding.'
     ],
-    takeaway: 'The “best” architecture is the one that meets the requirement within the real constraints.'
+    takeaway: 'US$10 is the project budget limit. Actual spend is tracked separately in AWS Billing.'
   },
   {
     id: 'well-architected',
@@ -363,8 +363,8 @@ export const mainSlides = [
   },
   {
     id: 'skills',
-    title: 'Skills Developed Through the Capstone',
-    subtitle: 'Practical skills developed across cloud, coding, data, security and delivery.',
+    title: 'What This Project Taught Me',
+    subtitle: 'The most useful learning came from connecting the parts and testing what could go wrong.',
     group: 'LEARN',
     badge: 'SKILLS GAINED',
     type: 'skills',
@@ -400,8 +400,12 @@ export const mainSlides = [
     type: 'closing',
     group: 'Close',
     headline: 'Trust the data.\\nUnderstand the risk.\\nProve the decision.',
-    summary: 'The solution goes beyond detecting risk. It helps the Analyst understand why something was flagged, investigate the evidence and prove what decision was made.',
+    summary: 'Clear reasons. Accountable investigations. A recorded decision.',
     presenter: 'Nompilo Eugenia Mchunu  |  Cloud Learner',
     cta: 'Thank you · Questions'
   }
 ];
+
+const chapterOrder = ['cover', 'about', 'scenario', 'assignment', 'disciplines', 'business-analysis', 'solution-design', 'data-model', 'sql-evidence', 'aws-architecture', 'system-integration', 'foundations', 'security', 'finops', 'solution-difference', 'data-quality', 'testing', 'well-architected', 'delivery', 'lessons', 'skills', 'roadmap', 'closing'];
+
+export const mainSlides = chapterOrder.map((id) => slideContent.find((slide) => slide.id === id));

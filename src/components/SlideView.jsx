@@ -6,6 +6,7 @@ import { DataModelSlide, IntegrationSlide, SqlBuildSlide } from './BuildEvidence
 import { ArchitectureWalkthrough, VerificationSummary } from './PresentationPolish.jsx';
 import { FlowArrow, IconBadge, VisualIcon, iconForLabel } from './VisualIcons.jsx';
 import { analystWireframeSource } from '../data/references.js';
+import { ProjectContribution, LearningOutcomes } from './Refinement.jsx';
 
 function PageMarker({ slide, number, total, appendixTotal, logoSrc }) {
   const appendixNumber = slide.appendix?.slice(1).padStart(2, '0');
@@ -95,6 +96,7 @@ function DetailDialog({ title, kicker, onClose, children, className = '' }) {
 }
 
 function PromiseQuestions({ slide, assetBase, active }) {
+  const [selectedStep, setSelectedStep] = useState(0);
   const [selectedScreen, setSelectedScreen] = useState(null);
   const triggerRef = useRef(null);
   const restoreFocusRef = useRef(false);
@@ -117,29 +119,25 @@ function PromiseQuestions({ slide, assetBase, active }) {
 
   return (
     <>
-      <div className="question-grid">
+      <div className="investigation-story">
+        <div className="investigation-stages" role="group" aria-label="Explore the investigation journey">
         {slide.questions.map((question, index) => {
-          const screen = slide.screens[index];
           return (
             <button
-              aria-label={`${question}. Open application screenshot`}
-              className="question-card"
+              aria-pressed={selectedStep === index}
               key={question}
-              onClick={(event) => {
-                triggerRef.current = event.currentTarget;
-                setSelectedScreen({ ...screen, question });
-              }}
+              onClick={() => setSelectedStep(index)}
               type="button"
             >
-              <span>0{index + 1}</span>
-              <h2><IconBadge name={['screen', 'search', 'audit'][index]} />{question}</h2>
-              <p className="question-benefit">{slide.benefits[index]}</p>
-              <img alt={screen.alt} src={`${assetBase}${screen.src}`} />
-              <span className="question-card__action">Explore this screen <span aria-hidden="true">↗</span></span>
-              {index < slide.questions.length - 1 && <FlowArrow className="question-connector" />}
+              <span>0{index + 1}</span><strong>{question}</strong>
             </button>
           );
         })}
+        </div>
+        <div className="investigation-focus">
+          <article aria-live="polite"><span>ADDED BEYOND THE BRIEF</span><h2>{['Work has an owner.', 'The reasons stay connected.', 'The decision is recorded.'][selectedStep]}</h2><p>{slide.benefits[selectedStep]}</p><p>{slide.screens[selectedStep].addition}</p><small>Original application captures show the stages of the workflow.</small></article>
+          <button className="investigation-screenshot" type="button" onClick={(event) => { triggerRef.current = event.currentTarget; setSelectedScreen({ ...slide.screens[selectedStep], question: slide.questions[selectedStep] }); }}><img src={`${assetBase}${slide.screens[selectedStep].src}`} alt={slide.screens[selectedStep].alt} /><span>Inspect the {['review queue', 'supporting evidence', 'investigation actions'][selectedStep]} ↗</span></button>
+        </div>
       </div>
       <p className="decision-note">{slide.takeaway}</p>
       {selectedScreen && (
@@ -427,7 +425,7 @@ function ProblemContext({ slide, active, assetBase }) {
 }
 
 function BusinessAnalysisEvidence({ slide, assetBase, active }) {
-  const [selected, setSelected] = useState('use-case');
+  const [selected, setSelected] = useState('wireframe');
   const resourceBase = `${import.meta.env.BASE_URL}resources/`;
   const diagrams = [
     { id: 'use-case', label: 'Use Case', title: 'Use Case Diagram', src: 'fintrust-use-case.png', base: resourceBase, alt: 'Imbokodo Risk and Compliance Workbench Use Case Diagram', caption: 'My Use Case Diagram maps the Analyst, Administrator, Auditor and Maintainer roles.', description: 'Who does what: investigate, manage access, read audit records or recover failed work.' },
@@ -545,7 +543,7 @@ function SlideBody({ slide, logoSrc, profileSrc, assetBase, onNavigate, qaItems,
             <p className="cover-kicker">{slide.strapline}</p>
             <h1><span>Transaction Insights, Risk</span><span>Monitoring</span><span>and Analyst Investigation</span></h1>
           </div>
-          <div className="cover-bank-mark"><img src={logoSrc} alt="Imbokodo Bank emblem" /></div>
+          <div className="cover-bank-mark"><img src={logoSrc} alt="Imbokodo Bank emblem" /><p>From a flagged transaction<br /><strong>to a decision that can be explained.</strong></p></div>
           <div className="cover-footer">
             <p>{slide.presenter}</p>
             <strong>{slide.motto}</strong>
@@ -632,7 +630,7 @@ function SlideBody({ slide, logoSrc, profileSrc, assetBase, onNavigate, qaItems,
         </>
       );
     case 'discipline-grid':
-      return <CardGrid cards={slide.cards} className="eight-card-grid" variant="discipline" assetBase={assetBase} active={active} onNavigate={onNavigate} />;
+      return <ProjectContribution slide={slide} active={active} />;
     case 'analysis':
       return (
         <div className="analysis-layout">
@@ -754,7 +752,7 @@ function SlideBody({ slide, logoSrc, profileSrc, assetBase, onNavigate, qaItems,
         </>
       );
     case 'skills':
-      return <CardGrid cards={slide.cards} className="eight-card-grid" variant="skills" assetBase={assetBase} active={active} onNavigate={onNavigate} />;
+      return <LearningOutcomes slide={slide} active={active} />;
     case 'roadmap':
       return (
         <>

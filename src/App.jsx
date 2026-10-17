@@ -214,6 +214,7 @@ function PresentationToolbar({
   onPanel,
   onToggleMode,
   onToggleFullscreen,
+  onToggleAudience,
   isFullscreen
 }) {
   const activeSlide = allSlides[activeIndex];
@@ -244,7 +245,8 @@ function PresentationToolbar({
           <button type="button" onClick={() => onPanel('architecture')} title="A jumps to Architecture">Architecture</button>
           <button type="button" onClick={() => onPanel('evidence')} title="E opens Evidence">Evidence</button>
           <TermsLauncher />
-          <a className="toolbar-demo-link" href={projectStatus.liveDemoUrl} target="_blank" rel="noopener noreferrer" aria-label="Open Imbokodo Risk and Compliance Workbench in a new tab">Open Workbench <small>LOCAL DEMO</small></a>
+          <a className="toolbar-demo-link" href={projectStatus.liveDemoUrl} target="_blank" rel="noopener noreferrer" title="Runs on the presenter’s computer. Remote viewers need their own running copy.">Presenter demo <small>LOCAL COMPUTER</small></a>
+        <button type="button" onClick={onToggleAudience} title="P toggles a clean audience view">Audience view</button>
         <button className="toolbar-mode" type="button" onClick={onToggleMode}>{mode === 'present' ? 'Browse' : 'Present'}</button>
         <button type="button" onClick={onToggleFullscreen}>{isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}</button>
       </div>
@@ -292,6 +294,7 @@ export default function App() {
   const [scale, setScale] = useState(0.5);
   const [announcement, setAnnouncement] = useState('');
   const [isFullscreen, setIsFullscreen] = useState(Boolean(document.fullscreenElement));
+  const [audienceView, setAudienceView] = useState(false);
   const allSlideCount = mainSlides.length;
 
   const currentSlide = allSlides[activeIndex];
@@ -386,7 +389,11 @@ export default function App() {
   }, [mode]);
 
   useEffect(() => {
-    const updateFullscreenState = () => setIsFullscreen(Boolean(document.fullscreenElement));
+    const updateFullscreenState = () => {
+      const fullscreen = Boolean(document.fullscreenElement);
+      setIsFullscreen(fullscreen);
+      setAudienceView(fullscreen);
+    };
     document.addEventListener('fullscreenchange', updateFullscreenState);
     return () => document.removeEventListener('fullscreenchange', updateFullscreenState);
   }, []);
@@ -435,6 +442,7 @@ export default function App() {
           return;
         }
         if (document.fullscreenElement) void toggleFullscreen();
+        setAudienceView(false);
         return;
       }
       if (panel) return;
@@ -465,6 +473,11 @@ export default function App() {
         return;
       }
       const key = event.key.toLowerCase();
+      if (event.altKey || event.ctrlKey || event.metaKey) return;
+      if (key === 'p') {
+        setAudienceView((current) => !current);
+        return;
+      }
       const shortcuts = {
         a: 'aws-architecture',
         c: 'finops',
@@ -509,7 +522,7 @@ export default function App() {
     : currentSlide.title, [currentSlide]);
 
   return (
-    <div className={`presentation-app presentation-app--${mode}`}>
+    <div className={`presentation-app presentation-app--${mode}${audienceView && mode === 'present' ? ' presentation-app--audience' : ''}`}>
       <PresentationToolbar
         activeIndex={activeIndex}
         mode={mode}
@@ -518,8 +531,10 @@ export default function App() {
         onToggleMode={toggleMode}
         onToggleFullscreen={toggleFullscreen}
         isFullscreen={isFullscreen}
+        onToggleAudience={() => { setMode('present'); setAudienceView(true); }}
       />
       <StoryNavigation activeSlide={currentSlide} onNavigate={navigateTo} />
+      {audienceView && mode === 'present' && <nav className="audience-controls" aria-label="Audience view controls"><button type="button" aria-label="Previous slide" disabled={activeIndex === 0} onClick={() => navigateBy(-1)}>←</button><span>{currentSlide.appendix || `${activeIndex + 1} / ${mainSlides.length}`}</span><button type="button" aria-label="Next slide" disabled={activeIndex === (currentSlide.appendix ? allSlides.length : mainSlides.length) - 1} onClick={() => navigateBy(1)}>→</button><button type="button" onClick={() => setAudienceView(false)}>Show controls</button></nav>}
       <main className={`presentation-view presentation-view--${mode}`} aria-label="Imbokodo Risk and Compliance Workbench presentation slides">
         {mode === 'present' ? (
           <div className="presentation-stage">

@@ -2,7 +2,7 @@
 
 Presented by **Nompilo Eugenia Mchunu**. GitHub account: **Nompil**.
 
-The presentation follows `Imbokodo_Bank_Capstone_Presentation_Final.pptx` as its visual and narrative source. All 20 original main slides remain in their relative order. Two data evidence slides follow Solution Design and one integration evidence slide follows AWS Architecture, making 23 main slides, with the existing technical appendix retained. Imbokodo Bank branding, the fixed 1920 × 1080 canvas and WHY → WHAT → HOW → SHOW → LEARN → SCALE → CLOSE navigation remain.
+The presentation follows `Imbokodo_Bank_Capstone_Presentation_Final.pptx` as its visual and narrative source. All original topics remain, with 23 main slides and the existing technical appendix. Security and FinOps sit with the other HOW slides before SHOW. Imbokodo Bank branding, the fixed 1920 × 1080 canvas and WHY → WHAT → HOW → SHOW → LEARN → SCALE → CLOSE navigation remain.
 
 ## Content placement
 
@@ -53,7 +53,7 @@ Use `npm run build` to create the static site in `dist/`, or `npm run preview` t
 - On the cover, select a story-stage label to jump directly to that chapter.
 - Standard slides repeat the Imbokodo Bank logo and Risk & Compliance Workbench wordmark in the upper-left, matching the supplied slide references.
 - On **Business Analysis: Starting With the Problem**, use the Use Case, Activity and Wireframe tabs. Each diagram opens in a zoomable evidence viewer.
-- On **What Makes the Solution Different**, select any of the three question cards to inspect its real application screenshot in a detail panel.
+- On **What Makes the Solution Different**, select a question to focus on one stage and its larger application capture. Select the image to inspect the original evidence and brief comparison.
 - On **A8 · Risk Scoring Rules**, select the example row to try amount bands and additional signals. The calculation uses the frozen R2 defaults; it does not query the live application or create an assessment.
 - **Three-Tier AWS Architecture** identifies the presentation, application and data layers above the business flow. **AWS services** adds the implementation names. Select a stage for its plain-English meaning and purpose; **Detailed diagram** retains the original PowerPoint evidence unchanged.
 - Testing shows 1,026 recorded Linux candidate tests passed, verified against the saved JUnit report and its SHA-256 hash. AWS transport was disabled. This is not a new run or proof of live cloud readiness. The historical milestone chart remains inside the detail panel; its values are not additive totals.
@@ -62,8 +62,9 @@ Use `npm run build` to create the static site in `dist/`, or `npm run preview` t
 - On **A16 · Application and Design Evidence**, select a screenshot to open a larger view; these are existing project assets.
 - **Present / Browse** switches between one-slide presentation mode and a scrollable overview.
 - **Index** opens the chapter list; **Q&A**, **Architecture**, and **Evidence** open quick-access panels.
-- **Open Workbench** opens the local demo at `http://127.0.0.1:5001/release1` in a new tab. The demo itself must be running locally.
-- Fullscreen can be entered or exited with the toolbar button or `Escape`.
+- **Presenter demo** opens `http://127.0.0.1:5001/release1` on the viewing computer. This is a local demonstration link, not a hosted Workbench available to remote viewers.
+- **Audience view** or `P` hides both navigation bars. Keyboard navigation and evidence controls remain available. Move to the bottom centre or tab to reveal the small navigation control. **Show controls**, `P` or `Escape` restores the toolbar.
+- Fullscreen also starts the clean audience view. Exit fullscreen with the toolbar or `Escape`.
 - `←` / `→`, `Space` / `Shift+Space`, `Home`, and `End` move through the deck.
 - `A`, `C`, `S`, `T`, and `R` jump to Architecture, FinOps, Security, Testing, and Roadmap.
 - `D` opens the local demo; `Q` opens Q&A; `E` opens Evidence.
@@ -74,7 +75,11 @@ Evidence dialogs open outside the scaled slide canvas, support keyboard closing 
 
 ## Presenter voice
 
-The presentation uses a balanced voice: first person for the introduction, a few personal decisions and speaking cues; clear, direct statements elsewhere. Avoid repetitive I openings and narration about Nompilo in the third person. Technical explanations stay plain while preserving service names, source code, thresholds and current-versus-future distinctions. File reminders belong in separate presenter notes. The original three-screen **What Makes the Solution Different** slide remains at main slide 13.
+The presentation uses a balanced voice: first person for the introduction, a few personal decisions and speaking cues; clear, direct statements elsewhere. Avoid repetitive I openings and narration about Nompilo in the third person. Technical explanations stay plain while preserving service names, source code, thresholds and current-versus-future distinctions. File reminders belong in separate presenter notes. **What Makes the Solution Different** starts SHOW at main slide 15 and retains all three original application captures.
+
+## Suggested presentation route
+
+Keep the main story linear. Open the Score calculation in HOW, the original Figma wireframe in Business Analysis, and the AWS Console at Architecture when needed. In SHOW, select the three investigation stages and inspect the evidence that supports each added capability. Use the live demonstration entry for the working Analyst journey. Keep the remaining appendix material for questions. The SQL slide shows labelled source excerpts and the expected output shape, not an invented query result. The US$10 figure is a budget limit rather than actual spend.
 
 ## Visual cues
 
