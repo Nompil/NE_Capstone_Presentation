@@ -37,7 +37,7 @@ const architectureStages = [
 ];
 
 export function ArchitectureWalkthrough({ active, assetBase, details, region }) {
-  const [layer, setLayer] = useState('business');
+  const [layer, setLayer] = useState('aws');
   const [selected, setSelected] = useState(null);
   const [regionOpen, setRegionOpen] = useState(false);
   const close = useCallback(() => setSelected(null), []);
@@ -45,7 +45,7 @@ export function ArchitectureWalkthrough({ active, assetBase, details, region }) 
   useEffect(() => { if (!active) { setSelected(null); setRegionOpen(false); } }, [active]);
   return <section className="architecture-walkthrough" aria-label="Readable Imbokodo Risk and Compliance Workbench architecture">
     <div className="architecture-tiers" aria-label="The three architecture tiers"><article><IconBadge name="screen" /><small>TIER 1 · PRESENTATION</small><strong>The Analyst screen</strong><span>Workbench · dashboards · investigation</span><FlowArrow twoWay className="tier-connector" /></article><article><IconBadge name="code" /><small>TIER 2 · APPLICATION</small><strong>The processing and rules</strong><span>API · Python / Lambda · queues</span><FlowArrow twoWay className="tier-connector" /></article><article><IconBadge name="database" /><small>TIER 3 · DATA</small><strong>The saved information</strong><span>PostgreSQL · DynamoDB · S3</span></article></div>
-    <div className="architecture-reveal"><p>How a transaction moves through the system</p><div role="group" aria-label="Architecture detail level"><button type="button" aria-pressed={layer === 'business'} onClick={() => setLayer('business')}>Business flow</button><button type="button" aria-pressed={layer === 'aws'} onClick={() => setLayer('aws')}>AWS services</button></div></div>
+    <div className="architecture-reveal"><p>SQS buffers incoming work. Lambda processes events.</p><div role="group" aria-label="Architecture detail level"><button type="button" aria-pressed={layer === 'business'} onClick={() => setLayer('business')}>Business flow</button><button type="button" aria-pressed={layer === 'aws'} onClick={() => setLayer('aws')}>AWS services</button></div></div>
     <ol className="readable-architecture">{architectureStages.map((stage, index) => <li key={stage.business} data-tone={stage.tone}><button type="button" aria-haspopup="dialog" onClick={() => setSelected(stage)}><VisualIcon name={iconForLabel(stage.business)} /><small>0{index + 1}{layer === 'aws' ? ` · ${stage.business}` : ''}</small><h3>{layer === 'aws' ? stage.service : stage.business}</h3><p>{stage.meaning}</p><span>Why this exists ↗</span></button>{index < architectureStages.length - 1 && <FlowArrow />}</li>)}</ol>
     <div className="architecture-rails"><article><strong>Protect access and monitor errors</strong><p>IAM controls permissions · CloudWatch helps find problems</p></article><article><strong>Handle bad data and technical errors separately</strong><p>Bad data → quarantine · Failed work → retry / failure queue</p></article></div>
     <div className="architecture-evidence-line"><button type="button" className="architecture-region-choice" aria-haspopup="dialog" onClick={() => setRegionOpen(true)}>{region} · Why this Region? ↗</button><EvidenceImage src="image-8-1.png" alt="Original Imbokodo Risk and Compliance Workbench architecture diagram" caption="My detailed AWS diagram shows the file, processing, data, reporting and recovery paths." label="Detailed diagram" className="architecture-original" assetBase={assetBase} active={active} /></div>

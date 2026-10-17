@@ -165,7 +165,7 @@ const slideContent = [
   {
     id: 'aws-architecture',
     title: 'Three-Tier AWS Architecture',
-    subtitle: 'Three connected layers: the Analyst screen, application logic and data storage.',
+    subtitle: 'The cloud design uses managed AWS services for files, processing, data storage and monitoring.',
     group: 'HOW',
     badge: 'ROLE: SOLUTION DESIGN',
     type: 'architecture',
