@@ -36,6 +36,13 @@
 .editorial-detail-list article { border-bottom: 1px solid #bacdd5; padding-bottom: 12px; }
 .editorial-detail-list h3 { font-size: 24px; color: var(--navy); }
 .editorial-detail-list p { font-size: 20px; line-height: 1.5; }
+.project-role-diagram { position: relative; width: 100%; }
+.project-role-diagram__canvas { position: absolute; top: 0; left: 0; width: 1920px; height: 730px; transform-origin: top left; }
+.project-role-diagram .card-grid--discipline { top: 0; }
+.project-role-diagram .discipline-source-hub { z-index: 1; border-color: #b49a50; }
+.project-role-diagram .content-card { z-index: 2; }
+.project-role-diagram .evidence-card-cue { font-size: 15px; }
+.project-role-diagram__connections { position: absolute; inset: 0; width: 1920px; height: 730px; fill: none; stroke: #8da8ba; stroke-width: 3; }
 .learning-layout > h2 { font-size: 60px; line-height: 1.16; margin: 0 0 70px; letter-spacing: -.025em; }
 .learning-outcomes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; }
 .learning-outcomes article { border-top: 3px solid #b69a50; padding-top: 24px; }

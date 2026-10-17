@@ -1,10 +1,23 @@
-import { useEffect, useState } from 'react';
-import { DetailDialog } from './Evidence.jsx';
+import { useEffect, useRef, useState } from 'react';
+import { DetailDialog, EvidenceGrid } from './Evidence.jsx';
+
+function ProjectRolesDiagram({ slide, active }) {
+  const frameRef = useRef(null);
+  const [scale, setScale] = useState(0.5);
+  useEffect(() => {
+    const frame = frameRef.current;
+    if (!frame) return undefined;
+    const observer = new ResizeObserver(() => setScale(Math.min(1, frame.clientWidth / 1920)));
+    observer.observe(frame);
+    return () => observer.disconnect();
+  }, []);
+  return <div className="project-role-diagram" ref={frameRef} style={{ height: `${730 * scale}px` }} aria-label="Cloud Learner connected to eight project responsibilities"><div className="project-role-diagram__canvas" style={{ transform: `scale(${scale})` }}><svg className="project-role-diagram__connections" viewBox="0 0 1920 730" aria-hidden="true"><path d="M960 355 L340 255 M960 355 L340 455 M960 355 L1580 255 M960 355 L1580 455 M960 355 L640 75 M960 355 L640 615 M960 355 L1280 75 M960 355 L1280 615" /></svg><EvidenceGrid cards={slide.cards} variant="discipline" active={active} /></div></div>;
+}
 
 function SupportingDetails({ slide, active, label }) {
   const [open, setOpen] = useState(false);
   useEffect(() => { if (!active) setOpen(false); }, [active]);
-  return <><button type="button" className="technical-launch editorial-details" onClick={() => setOpen(true)}>{label} ↗</button>{open && <DetailDialog title={slide.title} kicker="PROJECT EXPERIENCE" onClose={() => setOpen(false)}><div className="editorial-detail-list">{slide.cards.map((card) => <article key={card.title}><h3>{card.title}</h3><p>{card.body}</p></article>)}</div></DetailDialog>}</>;
+  return <><button type="button" className="technical-launch editorial-details" onClick={() => setOpen(true)}>{label} ↗</button>{open && <DetailDialog title={slide.title} kicker="PROJECT EXPERIENCE" onClose={() => setOpen(false)}>{slide.id === 'disciplines' ? <ProjectRolesDiagram slide={slide} active={active} /> : <div className="editorial-detail-list">{slide.cards.map((card) => <article key={card.title}><h3>{card.title}</h3><p>{card.body}</p></article>)}</div>}</DetailDialog>}</>;
 }
 
 export function ProjectContribution({ slide, active }) {
