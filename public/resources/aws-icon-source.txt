@@ -1,0 +1,7 @@
+AWS service icons used in aws-architecture-current.svg
+Source: https://aws.amazon.com/architecture/icons/
+Official icon package: July 31, 2026
+Package URL: https://d1.awsstatic.com/onedam/marketing-channels/website/public/shared/architecture-icon-release/Icon-package_07312026.5846e92413caa21490223536cc97f1269e44fa92.zip
+Retrieved October 18, 2026.
+The service icons are unmodified AWS assets embedded in a project-specific diagram.
+Browser and team symbols are generic project-drawn symbols, not AWS service icons.
