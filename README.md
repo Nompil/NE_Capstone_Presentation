@@ -55,19 +55,19 @@ Use `npm run build` to create the static site in `dist/`, or `npm run preview` t
 - On **Business Analysis: Starting With the Problem**, use the Use Case, Activity and Wireframe tabs. Each diagram opens in a zoomable evidence viewer.
 - On **What Makes the Solution Different**, select a question to focus on one stage and its larger application capture. Select the image to inspect the original evidence and brief comparison.
 - On **A8 · Risk Scoring Rules**, select the example row to try amount bands and additional signals. The calculation uses the frozen R2 defaults; it does not query the live application or create an assessment.
-- **Three-Tier AWS Architecture** identifies the presentation, application and data layers. AWS service names appear by default so the cloud design is immediately visible. **Business flow** switches to the plain process labels. The subtitle and queue explanation connect managed cloud services to their purpose. Select a stage for more detail. **Detailed diagram** retains the original PowerPoint evidence unchanged.
-- Testing shows 1,026 recorded Linux candidate tests passed, verified against the saved JUnit report and its SHA-256 hash. AWS transport was disabled. This is not a new run or proof of live cloud readiness. The historical milestone chart remains inside the detail panel; its values are not additive totals.
+- **Three-Tier AWS Architecture** identifies the presentation, application and data layers. AWS service names appear by default so the cloud design is immediately visible. **Business flow** switches to the plain process labels. The subtitle and queue explanation connect managed cloud services to their purpose. Select a stage for more detail. **Deployed cloud diagram** shows the recorded service paths. Its optional original-design disclosure retains the original PowerPoint evidence unchanged, with historical status labels identified.
+- Testing shows 1,146 automated checks from the retained Linux CI run with CPython 3.12.15 and PostgreSQL 16. Local and simulated-service checks are separate from the recorded six-row AWS demonstration. Earlier milestones remain historical, not additive.
 - **Terms** opens an optional 16-term plain-English reference. It adds no main slide.
 - The SHOW demonstration button opens A19, with a seven-step memory cue and deeper presenter speaking cues, recovery and authentic fallback evidence.
 - On **A16 · Application and Design Evidence**, select a screenshot to open a larger view; these are existing project assets.
 - **Present / Browse** switches between one-slide presentation mode and a scrollable overview.
 - **Index** opens the chapter list; **Q&A**, **Architecture**, and **Evidence** open quick-access panels.
-- **Presenter demo** opens `http://127.0.0.1:5001/release1` on the viewing computer. This is a local demonstration link, not a hosted Workbench available to remote viewers.
+- **Open Workbench** opens https://qzgzopn8o4.execute-api.af-south-1.amazonaws.com/dev/ in a new tab. The hosted application uses Cognito sign-in. No credentials are bundled.
 - **Audience view** or `P` hides both navigation bars. Keyboard navigation and evidence controls remain available. Move to the bottom centre or tab to reveal the small navigation control. **Show controls**, `P` or `Escape` restores the toolbar.
 - Fullscreen also starts the clean audience view. Exit fullscreen with the toolbar or `Escape`.
 - `←` / `→`, `Space` / `Shift+Space`, `Home`, and `End` move through the deck.
 - `A`, `C`, `S`, `T`, and `R` jump to Architecture, FinOps, Security, Testing, and Roadmap.
-- `D` opens the local demo; `Q` opens Q&A; `E` opens Evidence.
+- `D` opens the hosted Workbench; `Q` opens Q&A; `E` opens Evidence.
 - Keyboard controls are ignored while typing in a form field or editable content. Space activates focused buttons and disclosure controls instead of advancing the presentation.
 - Slide and menu transitions use subtle motion and follow the device's reduced-motion preference.
 
@@ -81,7 +81,7 @@ The presentation uses a balanced voice: first person for the introduction, a few
 
 Slide 19 explicitly maps the Software Development Life Cycle to requirements, design, development, testing, deployment and operations. Its deployment detail covers regional configuration, permissions and quota checks. Cloud is the platform, while SDLC is the delivery process. A service quota restriction is not a verified resolution until the affected deployment succeeds. Final presenter cue cards should follow the confirmed challenge and resolution record.
 
-Keep the main story linear. Open the Score calculation in HOW, the original Figma wireframe in Business Analysis, and the AWS Console at Architecture when needed. In SHOW, select the three investigation stages and inspect the evidence that supports each added capability. Use the live demonstration entry for the working Analyst journey. Keep the remaining appendix material for questions. The SQL slide shows labelled source excerpts and the expected output shape, not an invented query result. The US$10 figure is a budget limit rather than actual spend.
+Keep the main story linear. Open the Score calculation in HOW, the original Figma wireframe in Business Analysis, and the AWS Console at Architecture when needed. In SHOW, select the three investigation stages and inspect the evidence that supports each added capability. Use the live demonstration entry for the working Analyst journey. Keep the remaining appendix material for questions. The SQL slide shows labelled source excerpts and the expected output shape, not an invented query result. The US$10 figure is a budget notification target, not a spending cap or actual spend.
 
 ## Visual cues
 
@@ -112,7 +112,7 @@ Console access is deliberately limited to the local Vite development presentatio
 - Business Analysis now includes the original **Workbench Use Case Diagram** alongside the retained Activity Diagram in keyboard-accessible tabs. Both expand with zoom. The unmodified use-case PDF is available to view/download here and in Project Documents. Its 12 October 2026 planning/design provenance and independent role boundaries are explicit.
 
 - **A18 · From Analyst Need to Working System** adds eight clickable walkthroughs: frontend/API/backend, SQL, Lambda/Python, R2 scoring, alerts, wireframe comparison, live-demo sequence and project documents. Access it from **Evidence** or **Q&A**.
-- **A19 · Live System Demonstration** provides a dedicated presenter slide with the three demo flows, local application link, real fallback evidence and a return-to-SHOW control, without renumbering the main deck.
+- **A19 · Live System Demonstration** provides a dedicated presenter slide with the demo sequence, hosted application link, recorded AWS results and authentic supporting evidence and a return-to-SHOW control, without renumbering the main deck.
 - Main-slide entry points are retained within the existing design: Business Analysis opens the wireframe comparison; Solution Design opens API, Lambda and SQL evidence; AWS Architecture opens the independent alert path; the application slide opens the live-demo sequence; Well-Architected opens real documents.
 - `public/resources/` contains the supplied SOP PowerPoint, a slide-image PDF preview, the project-plan PDF, a public sharing copy of the Well-Architected report, authentic SOP screenshots, the project ERD, and actual source excerpts. The SOP PDF preview is a derivative, not a replacement SOP. The public Well-Architected copy has account and contact details removed. The untouched original stays outside the public repository and web build. The local `private-evidence/` folder is ignored by Git.
 - SQL tabs show repository source, not executed query results. Implementation tabs show real Python functions and the frontend request helper; deployment status remains separate. The Workbench uses JavaScript; React/Vite powers this presentation.
@@ -157,10 +157,24 @@ Publication sequence:
 5. Run the deployment workflow. Wait for the build and deployment to succeed before sharing the website address.
 6. Check slide navigation, screenshots, evidence panels, PDF downloads and external links on the hosted version.
 
-GitHub Pages hosts the presentation's static files. It does not run the Python backend or deploy the Workbench's AWS resources. The local application demonstration still requires the Workbench to be running on the presenter's computer. The AWS workload Region remains af-south-1; GitHub Pages is a separate hosting service.
+GitHub Pages hosts the presentation's static files. It does not run the Python backend or deploy the Workbench's AWS resources. The Workbench is hosted separately on AWS and requires its own application sign-in. The AWS workload Region remains af-south-1; GitHub Pages is a separate hosting service.
 
 A matching PDF edition of this guide is bundled as `public/resources/workbench-readme.pdf` and is available through Project Documents in the technical appendix.
 
 References: [What GitHub Pages hosts](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) and [GitHub Pages custom workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
 
-The presentation currently reports only the implementation and verification evidence included in its source content; deployment and live AWS service status are not asserted by the website.
+The website reports a retained AWS verification snapshot from 18 October 2026, 02:44 SAST. It is not a continuous health monitor or a production acceptance certificate.
+
+## Verified cloud handover, 18 October 2026
+
+Five Lambda workers, protected API Gateway routes, Cognito, private PostgreSQL, S3, SQS FIFO, DynamoDB Streams, SES and EventBridge were included in the recorded core demonstration. These are three logical layers of a serverless application, not three EC2 server tiers.
+
+The six-row cloud input produced three accepted rows, two quarantines and one duplicate, with no technical failures or pending items in that batch. A later correction returned 202 and reached RESOLVED, bringing the ledger to four. The earlier October report retains its three-row snapshot. The 200-row SQL seed is local evidence only.
+
+The Lambda quota increase remains unresolved. A verified workaround uses ten shared concurrent executions, no positive per-function reservations, and SQS concurrency of two. Shared contention and throttling remain possible. Basic Support does not establish the cause of a particular quota value.
+
+Two SES provider message IDs and aggregate Send 2 / Delivery 2 counters were recorded. Inbox receipt is unconfirmed. A detailed batch-status polling route returned 404 although the core pipeline completed. Full browser role rehearsal, live DLQ redrive, restoration, load acceptance and complete approved financial-data disposal remain separate work. Administrator user provisioning is operator-managed; the in-app user list is read-only.
+
+Open **Recorded cloud results** in SHOW or **Data governance & risks** at Well-Architected for bounded results and immutable source links. All original diagrams and screenshots remain. Historical V1 badges and old architecture status labels are not treated as current R2/cloud results.
+
+Evidence snapshot: [final AWS verification](https://github.com/Nompil/fintrust/blob/4a8ad8af275d8ee039873b4b2036e0f09c182b16/docs/EVIDENCE/13-cloud-live/final-live-verification.json), [core demonstration](https://github.com/Nompil/fintrust/blob/4a8ad8af275d8ee039873b4b2036e0f09c182b16/docs/EVIDENCE/13-cloud-live/core-cloud-demonstration.json), [retained CI run](https://github.com/Nompil/fintrust/actions/runs/39066017375).

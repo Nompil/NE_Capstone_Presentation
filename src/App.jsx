@@ -243,7 +243,7 @@ function PresentationToolbar({
           <button type="button" onClick={() => onPanel('architecture')} title="A jumps to Architecture">Architecture</button>
           <button type="button" onClick={() => onPanel('evidence')} title="E opens Evidence">Evidence</button>
           <TermsLauncher />
-          <a className="toolbar-demo-link" href={projectStatus.liveDemoUrl} target="_blank" rel="noopener noreferrer" title="Runs on the presenter’s computer. Remote viewers need their own running copy.">Presenter demo <small>LOCAL COMPUTER</small></a>
+          <a className="toolbar-demo-link" href={projectStatus.liveDemoUrl} target="_blank" rel="noopener noreferrer" title="Open the hosted Workbench. Cognito application sign-in is required.">Open Workbench <small>AWS CLOUD</small></a>
         <button type="button" onClick={onToggleAudience} title="P toggles a clean audience view">Audience view</button>
         <button className="toolbar-mode" type="button" onClick={onToggleMode}>{mode === 'present' ? 'Browse' : 'Present'}</button>
         <button type="button" onClick={onToggleFullscreen}>{isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}</button>
@@ -347,13 +347,13 @@ export default function App() {
     try {
       const opened = window.open(projectStatus.liveDemoUrl, '_blank');
       if (!opened) {
-        setAnnouncement('The browser blocked the local demo tab. Allow pop-ups for this presentation and try again.');
+        setAnnouncement('The browser blocked the Workbench tab. Allow pop-ups for this presentation and try again.');
         return;
       }
       opened.opener = null;
       setAnnouncement('Opening Imbokodo Risk and Compliance Workbench in a new tab.');
     } catch (error) {
-      setAnnouncement(`Could not open the local demo: ${error.message}`);
+      setAnnouncement(`Could not open the hosted Workbench: ${error.message}`);
     }
   }, []);
 

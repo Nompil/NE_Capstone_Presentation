@@ -130,3 +130,24 @@
 @media (prefers-reduced-motion: reduce) { .audience-controls { transition: none; } }
 @media (max-width: 850px) { .editorial-detail-list { grid-template-columns: 1fr; } }
 @media (hover: none) { .audience-controls { opacity: 1; } }
+.cloud-result-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 24px 0; }
+.cloud-result-grid article { padding: 22px; background: #edf2f7; border-top: 4px solid #416fa6; display: flex; flex-direction: column; gap: 8px; }
+.cloud-result-grid strong { font-size: 42px; color: #123244; }
+.cloud-result-grid article:nth-child(2) { border-color: #bd8c27; }
+.cloud-result-grid article:nth-child(3) { border-color: #8c6bb0; }
+.cloud-result-grid article:nth-child(4) { border-color: #278f83; }
+.cloud-evidence-links { display: flex; flex-wrap: wrap; gap: 14px 24px; margin: 24px 0; }
+.cloud-limitations { margin: 26px 0; padding: 18px; background: #f0f4f6; }
+.cloud-limitations summary { cursor: pointer; font-weight: 700; }
+.cloud-limitations li { margin: 12px 0; }
+.cloud-current-paths section { margin: 24px 0; }
+.cloud-current-paths ol { display: flex; list-style: none; padding: 0; gap: 24px; align-items: stretch; }
+.cloud-current-paths li { flex: 1; padding: 16px 12px; background: #e9eff7; border-top: 3px solid #416fa6; position: relative; font-weight: 600; }
+.cloud-current-paths li:not(:last-child)::after { content: '→'; position: absolute; left: calc(100% + 3px); top: 35%; color: #416fa6; }
+.cloud-current-paths section:nth-child(3) li { background: #f9eeeb; border-color: #b96550; }
+.cloud-risk-table p { border-left: 3px solid #bd8c27; padding: 12px 20px; background: #f6f4ee; }
+.slide-canvas--questions .technical-demo-entry { right: auto; width: auto; }
+.slide-canvas--questions .question-cloud-results { position: absolute; top: 903px; right: 110px; font-size: 21px; }
+.slide-canvas--well-architected .technical-resource-entry { right: auto; width: auto; }
+.slide-canvas--well-architected .governance-entry { position: absolute; top: 840px; right: 118px; font-size: 21px; }
+@media (max-width: 700px) { .cloud-result-grid { grid-template-columns: repeat(2, 1fr); } .cloud-current-paths ol { flex-direction: column; gap: 12px; } .cloud-current-paths li:not(:last-child)::after { content: none; } }

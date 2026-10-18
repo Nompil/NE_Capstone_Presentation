@@ -3,6 +3,7 @@ import { DetailDialog as FullScreenDetailDialog, EvidenceFlow, EvidenceGrid, Evi
 import TechnicalHub, { LiveDemoSlide, TechnicalLauncher } from './TechnicalEvidence.jsx';
 import AwsConsoleLink from './AwsConsoleLink.jsx';
 import { DataModelSlide, IntegrationSlide, SqlBuildSlide } from './BuildEvidence.jsx';
+import { CloudEvidenceLauncher } from './CloudEvidence.jsx';
 import { ArchitectureWalkthrough, VerificationSummary } from './PresentationPolish.jsx';
 import { FlowArrow, IconBadge, VisualIcon, iconForLabel } from './VisualIcons.jsx';
 import { analystWireframeSource } from '../data/references.js';
@@ -655,7 +656,7 @@ function SlideBody({ slide, logoSrc, profileSrc, assetBase, onNavigate, qaItems,
             <svg className="solution-alert-connector" viewBox="0 0 1920 60" aria-hidden="true"><path d="M1085 0 V25 H650 V42" /><path d="M643 34 L650 42 L657 34" /></svg>
             <TechnicalLauncher topic="alerts" accessibleLabel="Explore the independent HIGH-risk alert and delivery-failure flow" className="solution-alert-branch" active={active} label={<span className="solution-alert-content">
               <span className="solution-alert-label"><VisualIcon name="bell" />HIGH risk only · independent notification path</span>
-              <span className="solution-alert-nodes"><span>HIGH risk event</span><span aria-hidden="true">→</span><span>Alert Lambda</span><span aria-hidden="true">→</span><span>SES notification</span><span aria-hidden="true">→</span><span>Analyst / Risk team</span></span>
+              <span className="solution-alert-nodes"><span>HIGH risk · DynamoDB Streams</span><span aria-hidden="true">→</span><span>Alert Lambda</span><span aria-hidden="true">→</span><span>SES notification</span><span aria-hidden="true">→</span><span>Analyst / Risk team</span></span>
               <span className="solution-alert-failure">Delivery failure → Alert failure queue / DLQ → CloudWatch / Maintainer</span>
               <span className="solution-alert-truth">The saved risk record is the source of truth. The Analyst investigates and decides.</span>
             </span>} />
@@ -668,7 +669,7 @@ function SlideBody({ slide, logoSrc, profileSrc, assetBase, onNavigate, qaItems,
       return (
         <>
           <ArchitectureWalkthrough active={active} assetBase={assetBase} details={slide.details} region={slide.region} />
-          <TechnicalLauncher topic="alerts" label="HIGH risk → Alert Lambda → SES → team · Failure → alert-failure queue → CloudWatch / Maintainer" className="technical-main-strip" active={active} />
+          <TechnicalLauncher topic="alerts" label="HIGH risk → DynamoDB Streams → Alert Lambda → SES · Stored records remain the audit trail" className="technical-main-strip" active={active} />
           <AwsConsoleLink compact className="architecture-console-entry" />
         </>
       );
@@ -680,7 +681,7 @@ function SlideBody({ slide, logoSrc, profileSrc, assetBase, onNavigate, qaItems,
         </>
       );
     case 'questions':
-      return <><PromiseQuestions slide={slide} assetBase={assetBase} active={active} /><button type="button" className="technical-launch technical-demo-entry" onClick={() => onNavigate('appendix-live-demo')}>LIVE SYSTEM DEMONSTRATION ↗</button></>;
+      return <><PromiseQuestions slide={slide} assetBase={assetBase} active={active} /><button type="button" className="technical-launch technical-demo-entry" onClick={() => onNavigate('appendix-live-demo')}>LIVE SYSTEM DEMONSTRATION ↗</button><CloudEvidenceLauncher active={active} className="question-cloud-results" /></>;
     case 'recovery':
       return (
         <>
@@ -724,7 +725,7 @@ function SlideBody({ slide, logoSrc, profileSrc, assetBase, onNavigate, qaItems,
     case 'well-architected':
       return (
         <>
-          <TechnicalLauncher topic="resources" label="View / download the real review, SOP & project plan" className="technical-resource-entry" active={active} />
+          <TechnicalLauncher topic="resources" label="Review, SOP & project plan" className="technical-resource-entry" active={active} /><CloudEvidenceLauncher mode="governance" label="Data governance & risks" className="governance-entry" active={active} />
           <div className="pillar-grid">
             {slide.pillars.map((pillar) => (
               <article className={`pillar-card${pillar.reviewed ? ' pillar-card--reviewed' : ''}`} key={pillar.title}>

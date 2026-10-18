@@ -11,9 +11,10 @@ export const appendixSlides = [
       ['Valid rows', 'SQS FIFO → scoring Lambda → RDS PostgreSQL'],
       ['Invalid rows', 'Quarantine keeps the error reason and original file / row'],
       ['Risk summaries', 'Main PostgreSQL records → fast DynamoDB risk summaries'],
-      ['Application', 'API Gateway → query Lambda → Risk & Compliance Workbench'],
+      ['Application', 'Browser → Cognito → API Gateway → API Lambda; private data access'],
+      ['HIGH alerts', 'Saved risk → DynamoDB Streams → Alert Lambda → SES and delivery state'],
       ['Reporting', 'EventBridge → report Lambda → reports S3'],
-      ['Operations', 'CloudWatch / X-Ray; retries and DLQ paths']
+      ['Operations', 'Ten CloudWatch alarms; live failure and recovery drills remain separate']
     ]
   },
   {
@@ -85,8 +86,8 @@ export const appendixSlides = [
     rows: [
       ['Logs', 'Structured workload logs'],
       ['Metrics', 'Operational health and processing measures'],
-      ['Alarms', 'Budget and workload signals where configured'],
-      ['Tracing', 'X-Ray tracing design'],
+      ['Alarms', 'Ten standard-metric workload alarms verified; budget alerts are separate'],
+      ['Tracing', 'Full X-Ray coverage and alarm-recipient drills remain unverified'],
       ['Business events', 'Risk events go to Analyst review; technical failures use recovery paths']
     ]
   },
@@ -98,10 +99,12 @@ export const appendixSlides = [
     rows: [
       ['Amount bands', '≤50,000: 0 · >50,000 to 100,000: +15 · >100,000 to 200,000: +25 · >200,000: +40'],
       ['Additional signals', 'High velocity +25 · cross-border +15 · possible duplicate +20'],
-      ['Maximum score', '100'],
+      ['Velocity', 'More than five accepted transactions in the closed 300-second window, including this one'],
+      ['Duplicate signal', 'Distinct reliable source references; matching transaction attributes within 120 seconds'],
+      ['Maximum score', '100; no currency conversion before applying amount bands'],
       ['Risk levels', 'LOW 0 to 19 · MEDIUM 20 to 39 · HIGH 40 to 100'],
       ['Example', 'Very high amount + cross-border = 40 + 15 = 55 (HIGH)'],
-      ['Review targets', 'Medium 24h · High 4h · Specialist review 2h']
+      ['Review targets', 'Default Medium 24h · High 4h · escalated 2h from escalation; project targets, not law']
     ]
   },
   {
@@ -128,7 +131,8 @@ export const appendixSlides = [
       ['Data checks', 'Correct totals, safe retries and complete database updates'],
       ['Security', 'Role boundaries, account scope and protected actions'],
       ['Browser', 'Analyst journeys and UI verification'],
-      ['Linux test run', '1,026 checks passed with Python 3.12 and PostgreSQL 16.15']
+      ['Linux CI run', '1,146 checks passed; CPython 3.12.15 and PostgreSQL 16; local and simulated services'],
+      ['Separate AWS demo', 'Six rows: accepted 3, quarantined 2, duplicate 1; later corrected ledger 4']
     ]
   },
   {
@@ -151,22 +155,24 @@ export const appendixSlides = [
     subtitle: 'Separate roles give each user the right responsibilities and access.',
     rows: [
       ['Analyst', 'Owns investigation and records the decision'],
-      ['Admin', 'Manages user access, assignments and operational oversight'],
+      ['Admin', 'In-app user list is read-only; cloud provisioning is operator-managed'],
       ['Auditor', 'Read-only evidence and audit access'],
-      ['Maintainer', 'Technical recovery and operational support']
+      ['Maintainer', 'Technical recovery and operational support'],
+      ['Browser scope', 'Analyst sign-in confirmed; Admin first sign-in and wider role rehearsal remain separate']
     ]
   },
   {
     id: 'appendix-deployment',
     appendix: 'A13',
     title: 'Deployment Pipeline',
-    subtitle: 'Move through controlled stages with explicit approvals.',
+    subtitle: 'Five deployed Lambda workers use shared regional capacity.',
     rows: [
       ['Plan', 'Requirements, scope, architecture and cost'],
       ['Build', 'Application logic, data model and workflows'],
       ['Verify', 'Regression, Linux compatibility and browser evidence'],
-      ['Deploy', 'Staged cloud changes with approval gates'],
-      ['Record', 'Separate implemented, verified and future status']
+      ['Deploy', 'CloudFormation manages infrastructure; five Lambda workers deployed'],
+      ['Capacity workaround', 'Ten shared concurrent executions; SQS concurrency limited to two'],
+      ['Remaining limit', 'No approved quota increase; shared workers may compete or throttle']
     ]
   },
   {
@@ -179,7 +185,8 @@ export const appendixSlides = [
       ['Invalid row', 'Keep the error reason and original row in quarantine'],
       ['Processing failure', 'Retry and isolate after repeated failure'],
       ['Replay', 'Retry safely, then check totals and duplicate protection'],
-      ['Database', 'Save related changes together so records stay consistent']
+      ['Database', 'Save related changes together so records stay consistent'],
+      ['Cloud verification', 'Correction and duplicate suppression passed; exhausted retry / DLQ redrive drills unverified']
     ]
   },
   {
@@ -205,7 +212,7 @@ export const appendixSlides = [
     group: 'SHOW',
     images: [
       { src: 'image-6-1.png', caption: 'Admission, risk and reconciliation activity' },
-      { src: 'image-8-1.png', caption: 'Detailed AWS event-driven architecture' },
+      { src: 'image-8-1.png', caption: 'Original AWS design; historical status labels' },
       { src: 'image-10-1.png', caption: 'Imbokodo Bank analyst overview' },
       { src: 'image-10-2.png', caption: 'Risk evidence · historical V1 capture' },
       { src: 'image-10-3.png', caption: 'Investigation actions · historical V1 capture' },

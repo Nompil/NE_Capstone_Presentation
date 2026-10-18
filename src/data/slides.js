@@ -165,7 +165,7 @@ const slideContent = [
   {
     id: 'aws-architecture',
     title: 'Three-Tier AWS Architecture',
-    subtitle: 'The cloud design uses managed AWS services for files, processing, data storage and monitoring.',
+    subtitle: 'A serverless cloud application with three logical layers: the screen, application and data.',
     group: 'HOW',
     badge: 'ROLE: SOLUTION DESIGN',
     type: 'architecture',
@@ -276,7 +276,7 @@ const slideContent = [
       { title: 'Browser gates', body: 'The Analyst’s journey through the working screens' }
     ],
     timeline: ['129', '149', '158', '161', '178'],
-    takeaway: 'The Linux test report records 1,026 passing checks across the application, data and user workflow.'
+    takeaway: 'Separate AWS demo: six input rows produced three accepted, two quarantined and one duplicate. A correction brought the ledger to four.'
   },
   {
     id: 'security',
@@ -286,10 +286,10 @@ const slideContent = [
     badge: 'ROLE: SECURITY & OPERATIONS',
     type: 'security',
     cards: [
-      { title: 'Identity & access', items: ['Least-privilege IAM', 'Role-based business permissions', 'Private data access boundaries'] },
-      { title: 'Data protection', items: ['Private RDS', 'Encryption / protected configuration', 'Synthetic training data only'] },
+      { title: 'Identity & access', items: ['Cognito sign-in', 'Scoped IAM and business roles', 'Account-level access boundaries'] },
+      { title: 'Data protection', items: ['Private RDS', 'IAM database access with TLS', 'Synthetic demonstration data only'] },
       { title: 'Failure & recovery', items: ['Retries and DLQ', 'Quarantine for bad data', 'Controlled replay and reconciliation'] },
-      { title: 'Observability', items: ['Structured logs', 'CloudWatch metrics / alarms', 'X-Ray tracing design'] }
+      { title: 'Observability', items: ['Structured logs', 'Ten CloudWatch workload alarms', 'Alarm delivery drills remain separate'] }
     ],
     takeaway: 'Risky transactions go to Analyst review; technical failures go through retry and recovery paths.'
   },
@@ -301,7 +301,7 @@ const slideContent = [
     badge: 'ROLE: FINOPS',
     type: 'finops',
     budget: 'US$10',
-    budgetLabel: 'monthly budget limit',
+    budgetLabel: 'monthly budget target',
     alerts: ['50%', '80%', '100% actual', '100% forecast'],
     decisions: [
       'Avoid extra networking services that add standing monthly costs.',
@@ -310,7 +310,7 @@ const slideContent = [
       'Keep the setup lean without an extra database proxy or duplicate environments.',
       'Add resources in stages and check cost before expanding.'
     ],
-    takeaway: 'US$10 is the project budget limit. Actual spend is tracked separately in AWS Billing.'
+    takeaway: 'Budget alerts prompt action. They do not stop spending. Actual charges must be checked in AWS Billing.'
   },
   {
     id: 'well-architected',
@@ -354,10 +354,10 @@ const slideContent = [
     badge: 'LEARN',
     type: 'lessons',
     cards: [
-      { title: 'Architecture vs cost', challenge: 'Extra services could quickly use up the budget.', learning: 'I chose only the services the project needed.', outcome: 'A simpler design with clear cost and availability choices.' },
+      { title: 'Lambda capacity', challenge: 'The regional limit of ten concurrent runs blocked reserved capacity.', learning: 'Use shared capacity and limit SQS processing to two concurrent runs.', outcome: 'The cloud demo passed. A quota increase is still unresolved.' },
       { title: 'Technology vs user workflow', challenge: 'A score alone did not help the Analyst finish a review.', learning: 'Named owners, review deadlines, clear reasons and decision notes.', outcome: 'The Analyst can follow a risk event through to its recorded outcome.' },
-      { title: 'Data quality', challenge: 'A file can upload successfully and still contain bad rows.', learning: 'Separate invalid rows and keep the reason and original input.', outcome: 'Accepted data stays protected while bad rows can be corrected.' },
-      { title: 'Verification', challenge: 'Errors needed as much attention as successful transactions.', learning: 'Test bad inputs, repeated requests, Linux compatibility and user journeys.', outcome: 'A test record that shows what was checked and what passed.' }
+      { title: 'Safe data correction', challenge: 'A database permission prevented a correction from completing.', learning: 'Grant only the needed update permission and protect accepted financial data.', outcome: 'The corrected row reached RESOLVED. The ledger grew from three rows to four.' },
+      { title: 'Private database access', challenge: 'Maintenance still needed a safe path to a private database.', learning: 'Use controlled maintenance access and remove temporary access afterwards.', outcome: 'Maintenance completed without making the database public.' }
     ],
     takeaway: 'Every technical choice should support a user, a business requirement or an operational constraint.'
   },
@@ -387,8 +387,8 @@ const slideContent = [
     badge: 'SCALE',
     type: 'roadmap',
     horizons: [
-      { title: 'NOW', items: ['Controlled CSV ingestion', 'Validation + quarantine', 'Rule-based scoring', 'Analyst investigation', 'Audit + reports'] },
-      { title: 'NEXT', items: ['Secure scheduled feeds', 'API-based ingestion', 'Cognito workforce authentication', 'Alert grouping, cooldowns & digests', 'More operational automation'] },
+      { title: 'NOW', items: ['Controlled CSV ingestion', 'Validation + quarantine', 'Rule-based scoring', 'Cognito sign-in + Analyst review', 'Audit + scheduled reports'] },
+      { title: 'NEXT', items: ['Secure scheduled feeds', 'API-based ingestion', 'Wider role and recovery rehearsals', 'Alert grouping, cooldowns & digests', 'More operational automation'] },
       { title: 'LATER', items: ['Continuous transaction feeds', 'More risk scenarios', 'Learn each customer’s normal pattern', 'Stronger production resilience', 'Clearer evidence summaries'] }
     ],
     takeaway: 'The Workbench explains the evidence. The Analyst makes the decision.'
