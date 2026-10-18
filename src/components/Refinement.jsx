@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { DetailDialog, EvidenceGrid } from './Evidence.jsx';
 
-function ProjectRolesDiagram({ slide, active }) {
+function ProjectRolesDiagram({ slide, active, assetBase }) {
   const frameRef = useRef(null);
   const [scale, setScale] = useState(0.5);
   useEffect(() => {
@@ -11,17 +11,17 @@ function ProjectRolesDiagram({ slide, active }) {
     observer.observe(frame);
     return () => observer.disconnect();
   }, []);
-  return <div className="project-role-diagram" ref={frameRef} style={{ height: `${730 * scale}px` }} aria-label="Cloud Learner connected to eight project responsibilities"><div className="project-role-diagram__canvas" style={{ transform: `scale(${scale})` }}><svg className="project-role-diagram__connections" viewBox="0 0 1920 730" aria-hidden="true"><path d="M960 355 L340 255 M960 355 L340 455 M960 355 L1580 255 M960 355 L1580 455 M960 355 L640 75 M960 355 L640 615 M960 355 L1280 75 M960 355 L1280 615" /></svg><EvidenceGrid cards={slide.cards} variant="discipline" active={active} /></div></div>;
+  return <div className="project-role-diagram" ref={frameRef} style={{ height: `${730 * scale}px` }} aria-label="Cloud Learner connected to eight project responsibilities"><div className="project-role-diagram__canvas" style={{ transform: `scale(${scale})` }}><svg className="project-role-diagram__connections" viewBox="0 0 1920 730" aria-hidden="true"><path d="M960 355 L340 255 M960 355 L340 455 M960 355 L1580 255 M960 355 L1580 455 M960 355 L640 75 M960 355 L640 615 M960 355 L1280 75 M960 355 L1280 615" /></svg><EvidenceGrid cards={slide.cards} variant="discipline" active={active} assetBase={assetBase} /></div></div>;
 }
 
-function SupportingDetails({ slide, active, label }) {
+function SupportingDetails({ slide, active, label, assetBase }) {
   const [open, setOpen] = useState(false);
   useEffect(() => { if (!active) setOpen(false); }, [active]);
-  return <><button type="button" className="technical-launch editorial-details" onClick={() => setOpen(true)}>{label} ↗</button>{open && <DetailDialog title={slide.title} kicker="PROJECT EXPERIENCE" onClose={() => setOpen(false)}>{slide.id === 'disciplines' ? <ProjectRolesDiagram slide={slide} active={active} /> : <div className="editorial-detail-list">{slide.cards.map((card) => <article key={card.title}><h3>{card.title}</h3><p>{card.body}</p></article>)}</div>}</DetailDialog>}</>;
+  return <><button type="button" className="technical-launch editorial-details" onClick={() => setOpen(true)}>{label} ↗</button>{open && <DetailDialog title={slide.title} kicker="PROJECT EXPERIENCE" onClose={() => setOpen(false)}>{slide.id === 'disciplines' ? <ProjectRolesDiagram slide={slide} active={active} assetBase={assetBase} /> : <div className="editorial-detail-list">{slide.cards.map((card) => <article key={card.title}><h3>{card.title}</h3><p>{card.body}</p></article>)}</div>}</DetailDialog>}</>;
 }
 
-export function ProjectContribution({ slide, active }) {
-  return <section className="contribution-layout"><div className="editorial-statement"><span>ONE CONNECTED RESPONSIBILITY</span><h2>Understand the need.<br />Build the flow.<br /><em>Prove the outcome.</em></h2><p>The work followed the Analyst’s journey, from the original transaction file to the investigation record.</p></div><ol className="contribution-list"><li><strong>Define the problem</strong><p>Requirements, user roles, scope and wireframes.</p></li><li><strong>Connect the system</strong><p>Data model, Python rules, APIs and the Workbench.</p></li><li><strong>Deliver with control</strong><p>Tests, security, recovery, cost choices and documentation.</p></li></ol><SupportingDetails slide={slide} active={active} label="Explore all project responsibilities" /></section>;
+export function ProjectContribution({ slide, active, assetBase }) {
+  return <section className="contribution-layout"><div className="editorial-statement"><span>ONE CONNECTED RESPONSIBILITY</span><h2>Understand the need.<br />Build the flow.<br /><em>Prove the outcome.</em></h2><p>The work followed the Analyst’s journey, from the original transaction file to the investigation record.</p></div><ol className="contribution-list"><li><strong>Define the problem</strong><p>Requirements, user roles, scope and wireframes.</p></li><li><strong>Connect the system</strong><p>Data model, Python rules, APIs and the Workbench.</p></li><li><strong>Deliver with control</strong><p>Tests, security, recovery, cost choices and documentation.</p></li></ol><SupportingDetails slide={slide} active={active} assetBase={assetBase} label="Explore all project responsibilities" /></section>;
 }
 
 export function LearningOutcomes({ slide, active }) {

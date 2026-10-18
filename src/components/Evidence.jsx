@@ -57,7 +57,7 @@ export function DetailDialog({ title, kicker, onClose, children, className = '' 
   );
 }
 
-export function EvidenceImage({ src, alt, caption, assetBase, className = '', label = 'View full evidence', active = true, sourceUrl, sourceLabel = 'View source' }) {
+export function EvidenceImage({ src, alt, caption, assetBase = `${import.meta.env.BASE_URL}assets/`, className = '', label = 'View full evidence', active = true, sourceUrl, sourceLabel = 'View source' }) {
   const [open, setOpen] = useState(false);
   const [zoom, setZoom] = useState(100);
   const [fittedWidth, setFittedWidth] = useState(0);
@@ -171,7 +171,7 @@ export function ContextEvidence() {
   );
 }
 
-export function EvidenceGrid({ cards, className = '', variant = 'standard', assetBase, active = true, onNavigate }) {
+export function EvidenceGrid({ cards, className = '', variant = 'standard', assetBase = `${import.meta.env.BASE_URL}assets/`, active = true }) {
   const [selected, setSelected] = useState(null);
   const close = useCallback(() => setSelected(null), []);
   useEffect(() => { if (!active) setSelected(null); }, [active]);
@@ -192,8 +192,7 @@ export function EvidenceGrid({ cards, className = '', variant = 'standard', asse
         {detail?.kind !== 'risk' && <p>{detail?.text || selected.body}</p>}
         {detail?.items && <ul>{detail.items.map((item) => <li key={item}>{item}</li>)}</ul>}
         {detail?.kind === 'risk' && <RiskScoringSummary assetBase={assetBase} />}
-        {detail?.image && <figure className="context-evidence-figure"><img src={`${assetBase}${detail.image}`} alt={detail.caption || selected.title} /><figcaption>{detail.caption || 'Original project evidence from the supplied presentation.'}</figcaption></figure>}
-        {detail?.destination && <button className="evidence-navigate" type="button" onClick={() => { close(); onNavigate?.(detail.destination); }}>Open related slide ↗</button>}
+        {detail?.image && <><EvidenceImage src={detail.image} alt={selected.title === 'Business Analysis' ? 'Activity Diagram' : `${selected.title} project evidence`} caption={detail.caption || 'Original project evidence from the supplied presentation.'} label={selected.title === 'Business Analysis' ? 'Expand Activity Diagram' : 'Expand diagram or screenshot'} className="context-evidence-image" assetBase={assetBase} active={active} /><p className="evidence-caption">{detail.caption || 'Original project evidence from the supplied presentation.'}</p></>}
       </DetailDialog>}
     </>
   );

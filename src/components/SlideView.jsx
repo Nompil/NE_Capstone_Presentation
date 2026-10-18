@@ -631,7 +631,7 @@ function SlideBody({ slide, logoSrc, profileSrc, assetBase, onNavigate, qaItems,
         </>
       );
     case 'discipline-grid':
-      return <ProjectContribution slide={slide} active={active} />;
+      return <ProjectContribution slide={slide} active={active} assetBase={assetBase} />;
     case 'analysis':
       return (
         <div className="analysis-layout">

@@ -161,3 +161,4 @@
 .current-erd-constraint strong, .current-erd-constraint code { display: block; overflow-wrap: anywhere; }
 .current-erd-constraint code { font-size: 15px; padding-top: 6px; }
 .appendix-current-erd { margin-top: 24px; }
+.context-evidence-image { width: 100%; height: 420px; margin-top: 24px; }
