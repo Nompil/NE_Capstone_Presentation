@@ -432,7 +432,7 @@ function BusinessAnalysisEvidence({ slide, assetBase, active }) {
   const diagrams = [
     { id: 'use-case', label: 'Use Case', title: 'Use Case Diagram', src: 'fintrust-use-case.png', base: resourceBase, alt: 'Imbokodo Risk and Compliance Workbench Use Case Diagram', caption: 'My Use Case Diagram maps the Analyst, Administrator, Auditor and Maintainer roles.', description: 'Who does what: investigate, manage access, read audit records or recover failed work.' },
     { id: 'activity', label: 'Activity', title: 'Activity Diagram', src: slide.diagram, base: assetBase, alt: 'Activity Diagram', caption: slide.proof, description: slide.proof },
-    { id: 'wireframe', label: 'Wireframe', title: 'Analyst Investigation Wireframe', src: 'analyst-wireframe.png', base: resourceBase, alt: 'Supplied Figma Analyst Investigation wireframe', caption: 'The Figma wireframe shows the planned investigation layout.', description: 'Transaction details, risk reasons, notes and history support investigation in one place.', source: analystWireframeSource }
+    { id: 'wireframe', label: 'Wireframe', title: 'Analyst Investigation Wireframe', src: 'analyst-wireframe.png', base: resourceBase, alt: 'My Figma Analyst Investigation wireframe', caption: 'My Figma wireframe shows the investigation layout and actions.', description: 'Transaction details, risk reasons, notes and history support investigation in one place.', source: analystWireframeSource }
   ];
   const current = diagrams.find((diagram) => diagram.id === selected);
   const handleTabKeyDown = (event) => {
@@ -483,7 +483,7 @@ function ProfilePortrait({ src }) {
   const [available, setAvailable] = useState(true);
 
   return (
-    <div className="profile-card" aria-label={available ? 'Presenter portrait' : 'Presenter initials'}>
+    <div className="profile-card" aria-label={available ? 'My portrait' : 'My initials'}>
       {available ? (
         <img className="profile-photo" src={src} alt="Nompilo Eugenia Mchunu" onError={() => setAvailable(false)} />
       ) : (
@@ -687,8 +687,8 @@ function SlideBody({ slide, logoSrc, profileSrc, assetBase, onNavigate, qaItems,
       return (
         <>
           <div className="source-recovery-evidence">
-            <EvidenceImage src="image-11-1.png" alt="Quarantine reason and source lineage" caption="Imbokodo Bank source-deck capture: invalid account identifier and available recovery actions." assetBase={assetBase} active={active} label="Inspect the quarantined row" />
-            <EvidenceImage src="image-11-2.png" alt="Quarantine correction and audit history" caption="Imbokodo Bank source-deck capture: original values, correction history and recorded quarantine event." assetBase={assetBase} active={active} label="Inspect recovery evidence" />
+            <EvidenceImage src="image-11-1.png" alt="Quarantine reason and source lineage" caption="An invalid account identifier and the available recovery actions." assetBase={assetBase} active={active} label="Inspect the quarantined row" />
+            <EvidenceImage src="image-11-2.png" alt="Quarantine correction and audit history" caption="The original values, correction history and recorded quarantine event." assetBase={assetBase} active={active} label="Inspect recovery evidence" />
           </div>
           <ProcessRow steps={slide.steps} className="process-row--recovery" active={active} assetBase={assetBase} />
           <p className="slide-takeaway">{slide.takeaway}</p>

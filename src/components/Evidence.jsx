@@ -192,7 +192,7 @@ export function EvidenceGrid({ cards, className = '', variant = 'standard', asse
         {detail?.kind !== 'risk' && <p>{detail?.text || selected.body}</p>}
         {detail?.items && <ul>{detail.items.map((item) => <li key={item}>{item}</li>)}</ul>}
         {detail?.kind === 'risk' && <RiskScoringSummary assetBase={assetBase} />}
-        {detail?.image && <><EvidenceImage src={detail.image} alt={selected.title === 'Business Analysis' ? 'Activity Diagram' : `${selected.title} project evidence`} caption={detail.caption || 'Original project evidence from the supplied presentation.'} label={selected.title === 'Business Analysis' ? 'Expand Activity Diagram' : 'Expand diagram or screenshot'} className="context-evidence-image" assetBase={assetBase} active={active} /><p className="evidence-caption">{detail.caption || 'Original project evidence from the supplied presentation.'}</p></>}
+        {detail?.image && <><EvidenceImage src={detail.image} alt={selected.title === 'Business Analysis' ? 'Activity Diagram' : `${selected.title} project evidence`} caption={detail.caption || 'My project diagram or application screenshot.'} label={selected.title === 'Business Analysis' ? 'Expand Activity Diagram' : 'Expand diagram or screenshot'} className="context-evidence-image" assetBase={assetBase} active={active} /><p className="evidence-caption">{detail.caption || 'My project diagram or application screenshot.'}</p></>}
       </DetailDialog>}
     </>
   );
@@ -218,8 +218,8 @@ export function EvidenceFlow({ steps, className = '', active = true, assetBase }
 export function VerificationChart({ values }) {
   const [open, setOpen] = useState(false);
   const close = useCallback(() => setOpen(false), []);
-  const chart = <figure className="verification-chart"><div className="verification-bars" role="img" aria-label={`Historical passing test milestones in source-deck order: ${values.join(', ')}.`}>
+  const chart = <figure className="verification-chart"><div className="verification-bars" role="img" aria-label={`Passing test counts at earlier development milestones: ${values.join(', ')}.`}>
     {values.map((value, index) => <div key={value}><strong>{value}</strong><span style={{ height: `${Number(value) / 178 * 100}%` }} /><small>Milestone {index + 1}</small></div>)}
   </div><figcaption>My earlier test milestones show how the test suite grew through the project. Each bar is a separate stage.</figcaption></figure>;
-  return <><button className="verification-chart-trigger" type="button" aria-haspopup="dialog" onClick={() => setOpen(true)}><span>Verification progression · source-deck milestones</span><span className="milestone-spark">{values.map((value) => <span key={value} style={{ '--bar-height': `${Number(value) / 178 * 100}%` }}><i /><strong>{value}</strong></span>)}</span><small>Open chart & context ↗</small></button>{open && <DetailDialog title="Verification grew with the product" kicker="HISTORICAL PROJECT EVIDENCE" onClose={close}>{chart}</DetailDialog>}</>;
+  return <><button className="verification-chart-trigger" type="button" aria-haspopup="dialog" onClick={() => setOpen(true)}><span>How the test suite grew</span><span className="milestone-spark">{values.map((value) => <span key={value} style={{ '--bar-height': `${Number(value) / 178 * 100}%` }}><i /><strong>{value}</strong></span>)}</span><small>View earlier test milestones ↗</small></button>{open && <DetailDialog title="How the test suite grew" kicker="EARLIER DEVELOPMENT MILESTONES" onClose={close}>{chart}</DetailDialog>}</>;
 }
