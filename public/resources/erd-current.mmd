@@ -1,0 +1,200 @@
+erDiagram
+  accounts {
+    uuid account_id PK
+    uuid customer_id FK
+    varchar_30_ account_type
+    numeric_15_2_ balance
+    varchar_20_ status
+    timestamptz opened_at
+  }
+  alerts {
+    bigint alert_id PK
+    bigint risk_event_id FK
+    varchar_20_ severity
+    text message
+    timestamptz sent_at
+    bigint delivery_key UK
+    varchar_10_ delivery_state
+    text provider_message_id
+  }
+  correction_outbox {
+    uuid correction_id PK,FK
+    jsonb envelope
+    text state
+    integer attempts
+    text last_error_type
+    timestamptz completed_at
+  }
+  customers {
+    uuid customer_id PK
+    varchar_150_ full_name
+    varchar_20_ id_number UK
+    varchar_20_ kyc_status
+    timestamptz created_at
+  }
+  ingestion_attempts {
+    uuid attempt_id PK,UK
+    uuid batch_id FK,UK
+    text source_bucket
+    text source_file
+    text source_version
+    text source_etag
+    timestamptz received_at
+    text status
+    text error_code
+  }
+  ingestion_batches {
+    uuid batch_id PK
+    varchar_100_ source_system
+    text source_bucket UK
+    char_64_ file_sha256 UK
+    timestamptz received_at
+    integer rows_received
+    boolean publication_complete
+    text file_failure_code
+  }
+  ingestion_records {
+    uuid batch_id PK,FK
+    integer source_row PK
+    uuid source_attempt_id FK
+    text disposition
+    char_64_ candidate_digest
+    uuid canonical_tx_id FK
+    text reason_code
+    timestamptz updated_at
+  }
+  operations_requests {
+    uuid request_id PK
+    text actor_subject
+    text action
+    text target
+    char_64_ request_digest
+    text state
+    jsonb result
+    timestamptz created_at
+    timestamptz completed_at
+  }
+  processed_transactions {
+    uuid tx_id PK,FK
+    char_64_ fingerprint
+    jsonb result
+    timestamptz processed_at
+  }
+  projection_outbox {
+    uuid tx_id PK,FK
+    text state
+    timestamptz completed_at
+  }
+  quarantine_cases {
+    uuid quarantine_id PK
+    uuid batch_id FK,UK
+    integer source_row FK,UK
+    text reason_code
+    text reason_detail
+    jsonb validation_errors
+    uuid candidate_account_id
+    text safe_payload_key
+    text safe_payload_version
+    text source_reference
+    timestamptz quarantined_at
+  }
+  quarantine_corrections {
+    uuid correction_id PK
+    uuid quarantine_id FK,UK
+    uuid request_id UK
+    char_64_ request_digest
+    integer correction_version UK
+    text submitted_by
+    timestamptz submitted_at
+    text correction_notes
+    text corrected_payload_key
+    text corrected_payload_version
+    text action
+    uuid reprocess_batch_id FK
+    integer reprocess_source_row FK
+  }
+  risk_events {
+    bigint risk_event_id PK
+    uuid tx_id FK
+    integer risk_score
+    varchar_255_ reason
+    timestamptz created_at
+  }
+  risk_review_history {
+    bigint risk_event_id PK,FK
+    integer version PK
+    uuid request_id UK
+    char_64_ request_digest
+    text before_status
+    text after_status
+    text actor_subject
+    text reviewer_subject
+    text notes
+    text resolution_code
+    timestamptz changed_at
+  }
+  risk_reviews {
+    bigint risk_event_id PK,FK
+    text review_status
+    text reviewer_subject
+    text reviewed_by
+    timestamptz reviewed_at
+    text review_notes
+    text resolution_code
+    text change_actor
+    uuid change_request_id
+    char_64_ request_digest
+    integer version
+    timestamptz created_at
+  }
+  schema_migrations {
+    integer version PK
+    char_64_ source_sha256
+    char_64_ catalog_sha256
+    timestamptz applied_at
+  }
+  transaction_lifecycle_events {
+    bigint event_id PK
+    uuid batch_id FK,UK
+    integer source_row FK,UK
+    integer sequence UK
+    text event_type
+    timestamptz occurred_at
+    text actor_subject
+    text error_type
+  }
+  transactions {
+    uuid tx_id PK
+    uuid account_id FK
+    numeric_15_2_ amount
+    char_3_ currency
+    varchar_200_ merchant
+    timestamptz tx_date
+    varchar_30_ tx_type
+    boolean cross_border
+    text raw_file
+    varchar_100_ source_system
+    varchar_200_ source_transaction_id
+    char_64_ transaction_fingerprint
+    uuid batch_id
+    char_64_ file_sha256
+    integer source_row
+    char_2_ country
+  }
+  customers ||--o{ accounts : "customer_id"
+  risk_events ||--o{ alerts : "risk_event_id"
+  quarantine_corrections ||--o| correction_outbox : "correction_id"
+  ingestion_batches |o--o{ ingestion_attempts : "batch_id"
+  ingestion_batches ||--o{ ingestion_records : "batch_id"
+  ingestion_attempts ||--o{ ingestion_records : "batch_id, source_attempt_id"
+  transactions |o--o{ ingestion_records : "canonical_tx_id"
+  transactions ||--o| processed_transactions : "tx_id"
+  processed_transactions ||--o| projection_outbox : "tx_id"
+  ingestion_records ||--o| quarantine_cases : "batch_id, source_row"
+  quarantine_cases ||--o{ quarantine_corrections : "quarantine_id"
+  ingestion_records |o--o{ quarantine_corrections : "reprocess_batch_id, reprocess_source_row"
+  transactions ||--o{ risk_events : "tx_id"
+  risk_reviews ||--o{ risk_review_history : "risk_event_id"
+  risk_events ||--o| risk_reviews : "risk_event_id"
+  ingestion_records ||--o{ transaction_lifecycle_events : "batch_id, source_row"
+  accounts ||--o{ transactions : "account_id"

@@ -113,11 +113,12 @@ export const appendixSlides = [
     title: 'Data Model / ERD',
     subtitle: 'Connected transactions, scores, reviews and history make decisions traceable from start to finish.',
     rows: [
-      ['Transaction', 'Accepted transaction details and original file / row'],
-      ['Risk assessment', 'Score, risk level, reasons and the rules used'],
-      ['Investigation', 'Owner, review deadline, notes and decision status'],
-      ['Audit history', 'Recorded actions and outcome changes'],
-      ['Risk summaries', 'Fast lookups support the main database records']
+      ['Physical model', '18 tables, 17 foreign keys and two derived workflow views'],
+      ['Transaction', 'transactions.tx_id is UUID; source identity has a partial unique index'],
+      ['Frozen assessment', 'processed_transactions.result stores the saved score, reasons and rule version'],
+      ['Investigation', 'risk_reviews uses risk_event_id as its primary and foreign key'],
+      ['Audit history', 'risk_review_history has composite key (risk_event_id, version)'],
+      ['Recovery', 'Ingestion, lifecycle, quarantine, corrections and durable outboxes are included']
     ]
   },
   {

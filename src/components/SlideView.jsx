@@ -4,6 +4,7 @@ import TechnicalHub, { LiveDemoSlide, TechnicalLauncher } from './TechnicalEvide
 import AwsConsoleLink from './AwsConsoleLink.jsx';
 import { DataModelSlide, IntegrationSlide, SqlBuildSlide } from './BuildEvidence.jsx';
 import { CloudEvidenceLauncher } from './CloudEvidence.jsx';
+import { CurrentErdLauncher } from './CurrentErd.jsx';
 import { ArchitectureWalkthrough, VerificationSummary } from './PresentationPolish.jsx';
 import { FlowArrow, IconBadge, VisualIcon, iconForLabel } from './VisualIcons.jsx';
 import { analystWireframeSource } from '../data/references.js';
@@ -780,6 +781,7 @@ function SlideBody({ slide, logoSrc, profileSrc, assetBase, onNavigate, qaItems,
               <div className="appendix-row" key={label}><strong>{label}</strong><span>{detail}</span></div>
             ))}
           </div>
+          {slide.id === 'appendix-data-model' && <CurrentErdLauncher active={active} className="appendix-current-erd" label="Open full ERD, columns and keys" />}
         </div>
       );
     case 'data-model-evidence':

@@ -151,3 +151,13 @@
 .slide-canvas--well-architected .technical-resource-entry { right: auto; width: auto; }
 .slide-canvas--well-architected .governance-entry { position: absolute; top: 840px; right: 118px; font-size: 21px; }
 @media (max-width: 700px) { .cloud-result-grid { grid-template-columns: repeat(2, 1fr); } .cloud-current-paths ol { flex-direction: column; gap: 12px; } .cloud-current-paths li:not(:last-child)::after { content: none; } }
+.current-erd-preview { width: 100%; height: 440px; }
+.current-erd-table-choice { display: flex; gap: 16px; align-items: center; margin: 24px 0; font-weight: 700; }
+.current-erd-table-choice select { padding: 10px; font: inherit; max-width: 100%; background: white; color: #173748; border: 1px solid #8da2af; }
+.current-erd-columns { overflow-x: auto; }
+.current-erd-columns table { width: 100%; border-collapse: collapse; font-size: 17px; background: white; }
+.current-erd-columns th, .current-erd-columns td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #d8e2e7; }
+.current-erd-columns th { background: #e5edf5; }
+.current-erd-constraint strong, .current-erd-constraint code { display: block; overflow-wrap: anywhere; }
+.current-erd-constraint code { font-size: 15px; padding-top: 6px; }
+.appendix-current-erd { margin-top: 24px; }

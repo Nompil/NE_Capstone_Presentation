@@ -1,0 +1,2984 @@
+{
+  "relations": [
+    {
+      "name": "accounts",
+      "kind": "r"
+    },
+    {
+      "name": "alerts",
+      "kind": "r"
+    },
+    {
+      "name": "batch_reconciliation",
+      "kind": "v"
+    },
+    {
+      "name": "correction_outbox",
+      "kind": "r"
+    },
+    {
+      "name": "customers",
+      "kind": "r"
+    },
+    {
+      "name": "ingestion_attempts",
+      "kind": "r"
+    },
+    {
+      "name": "ingestion_batches",
+      "kind": "r"
+    },
+    {
+      "name": "ingestion_records",
+      "kind": "r"
+    },
+    {
+      "name": "operations_requests",
+      "kind": "r"
+    },
+    {
+      "name": "processed_transactions",
+      "kind": "r"
+    },
+    {
+      "name": "projection_outbox",
+      "kind": "r"
+    },
+    {
+      "name": "quarantine_cases",
+      "kind": "r"
+    },
+    {
+      "name": "quarantine_corrections",
+      "kind": "r"
+    },
+    {
+      "name": "quarantine_workflow",
+      "kind": "v"
+    },
+    {
+      "name": "risk_events",
+      "kind": "r"
+    },
+    {
+      "name": "risk_review_history",
+      "kind": "r"
+    },
+    {
+      "name": "risk_reviews",
+      "kind": "r"
+    },
+    {
+      "name": "schema_migrations",
+      "kind": "r"
+    },
+    {
+      "name": "transaction_lifecycle_events",
+      "kind": "r"
+    },
+    {
+      "name": "transactions",
+      "kind": "r"
+    }
+  ],
+  "columns": [
+    {
+      "table": "accounts",
+      "name": "account_id",
+      "type": "uuid",
+      "not_null": true,
+      "ordinal": 1,
+      "default": "gen_random_uuid()",
+      "identity": ""
+    },
+    {
+      "table": "accounts",
+      "name": "customer_id",
+      "type": "uuid",
+      "not_null": true,
+      "ordinal": 2,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "accounts",
+      "name": "account_type",
+      "type": "character varying(30)",
+      "not_null": true,
+      "ordinal": 3,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "accounts",
+      "name": "balance",
+      "type": "numeric(15,2)",
+      "not_null": true,
+      "ordinal": 4,
+      "default": "0.00",
+      "identity": ""
+    },
+    {
+      "table": "accounts",
+      "name": "status",
+      "type": "character varying(20)",
+      "not_null": true,
+      "ordinal": 5,
+      "default": "'active'::character varying",
+      "identity": ""
+    },
+    {
+      "table": "accounts",
+      "name": "opened_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "ordinal": 6,
+      "default": "now()",
+      "identity": ""
+    },
+    {
+      "table": "alerts",
+      "name": "alert_id",
+      "type": "bigint",
+      "not_null": true,
+      "ordinal": 1,
+      "default": "nextval('alerts_alert_id_seq'::regclass)",
+      "identity": ""
+    },
+    {
+      "table": "alerts",
+      "name": "risk_event_id",
+      "type": "bigint",
+      "not_null": true,
+      "ordinal": 2,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "alerts",
+      "name": "severity",
+      "type": "character varying(20)",
+      "not_null": true,
+      "ordinal": 3,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "alerts",
+      "name": "message",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 4,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "alerts",
+      "name": "sent_at",
+      "type": "timestamp with time zone",
+      "not_null": false,
+      "ordinal": 5,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "alerts",
+      "name": "delivery_key",
+      "type": "bigint",
+      "not_null": false,
+      "ordinal": 6,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "alerts",
+      "name": "delivery_state",
+      "type": "character varying(10)",
+      "not_null": true,
+      "ordinal": 7,
+      "default": "'UNKNOWN'::character varying",
+      "identity": ""
+    },
+    {
+      "table": "alerts",
+      "name": "provider_message_id",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 8,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "batch_reconciliation",
+      "name": "batch_id",
+      "type": "uuid",
+      "not_null": false,
+      "ordinal": 1,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "batch_reconciliation",
+      "name": "rows_received",
+      "type": "integer",
+      "not_null": false,
+      "ordinal": 2,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "batch_reconciliation",
+      "name": "publication_complete",
+      "type": "boolean",
+      "not_null": false,
+      "ordinal": 3,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "batch_reconciliation",
+      "name": "file_failure_code",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 4,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "batch_reconciliation",
+      "name": "recorded",
+      "type": "bigint",
+      "not_null": false,
+      "ordinal": 5,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "batch_reconciliation",
+      "name": "accepted",
+      "type": "bigint",
+      "not_null": false,
+      "ordinal": 6,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "batch_reconciliation",
+      "name": "quarantined",
+      "type": "bigint",
+      "not_null": false,
+      "ordinal": 7,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "batch_reconciliation",
+      "name": "duplicate",
+      "type": "bigint",
+      "not_null": false,
+      "ordinal": 8,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "batch_reconciliation",
+      "name": "failed_technical",
+      "type": "bigint",
+      "not_null": false,
+      "ordinal": 9,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "batch_reconciliation",
+      "name": "pending",
+      "type": "bigint",
+      "not_null": false,
+      "ordinal": 10,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "batch_reconciliation",
+      "name": "counts_consistent",
+      "type": "boolean",
+      "not_null": false,
+      "ordinal": 11,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "batch_reconciliation",
+      "name": "status",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 12,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "correction_outbox",
+      "name": "correction_id",
+      "type": "uuid",
+      "not_null": true,
+      "ordinal": 1,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "correction_outbox",
+      "name": "envelope",
+      "type": "jsonb",
+      "not_null": true,
+      "ordinal": 2,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "correction_outbox",
+      "name": "state",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 3,
+      "default": "'PENDING'::text",
+      "identity": ""
+    },
+    {
+      "table": "correction_outbox",
+      "name": "attempts",
+      "type": "integer",
+      "not_null": true,
+      "ordinal": 4,
+      "default": "0",
+      "identity": ""
+    },
+    {
+      "table": "correction_outbox",
+      "name": "last_error_type",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 5,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "correction_outbox",
+      "name": "completed_at",
+      "type": "timestamp with time zone",
+      "not_null": false,
+      "ordinal": 6,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "customers",
+      "name": "customer_id",
+      "type": "uuid",
+      "not_null": true,
+      "ordinal": 1,
+      "default": "gen_random_uuid()",
+      "identity": ""
+    },
+    {
+      "table": "customers",
+      "name": "full_name",
+      "type": "character varying(150)",
+      "not_null": true,
+      "ordinal": 2,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "customers",
+      "name": "id_number",
+      "type": "character varying(20)",
+      "not_null": true,
+      "ordinal": 3,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "customers",
+      "name": "kyc_status",
+      "type": "character varying(20)",
+      "not_null": true,
+      "ordinal": 4,
+      "default": "'pending'::character varying",
+      "identity": ""
+    },
+    {
+      "table": "customers",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "ordinal": 5,
+      "default": "now()",
+      "identity": ""
+    },
+    {
+      "table": "ingestion_attempts",
+      "name": "attempt_id",
+      "type": "uuid",
+      "not_null": true,
+      "ordinal": 1,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "ingestion_attempts",
+      "name": "batch_id",
+      "type": "uuid",
+      "not_null": false,
+      "ordinal": 2,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "ingestion_attempts",
+      "name": "source_bucket",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 3,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "ingestion_attempts",
+      "name": "source_file",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 4,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "ingestion_attempts",
+      "name": "source_version",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 5,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "ingestion_attempts",
+      "name": "source_etag",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 6,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "ingestion_attempts",
+      "name": "received_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "ordinal": 7,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "ingestion_attempts",
+      "name": "status",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 8,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "ingestion_attempts",
+      "name": "error_code",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 9,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "ingestion_batches",
+      "name": "batch_id",
+      "type": "uuid",
+      "not_null": true,
+      "ordinal": 1,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "ingestion_batches",
+      "name": "source_system",
+      "type": "character varying(100)",
+      "not_null": true,
+      "ordinal": 2,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "ingestion_batches",
+      "name": "source_bucket",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 3,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "ingestion_batches",
+      "name": "file_sha256",
+      "type": "character(64)",
+      "not_null": true,
+      "ordinal": 4,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "ingestion_batches",
+      "name": "received_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "ordinal": 5,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "ingestion_batches",
+      "name": "rows_received",
+      "type": "integer",
+      "not_null": false,
+      "ordinal": 6,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "ingestion_batches",
+      "name": "publication_complete",
+      "type": "boolean",
+      "not_null": true,
+      "ordinal": 7,
+      "default": "false",
+      "identity": ""
+    },
+    {
+      "table": "ingestion_batches",
+      "name": "file_failure_code",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 8,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "ingestion_records",
+      "name": "batch_id",
+      "type": "uuid",
+      "not_null": true,
+      "ordinal": 1,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "ingestion_records",
+      "name": "source_row",
+      "type": "integer",
+      "not_null": true,
+      "ordinal": 2,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "ingestion_records",
+      "name": "source_attempt_id",
+      "type": "uuid",
+      "not_null": true,
+      "ordinal": 3,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "ingestion_records",
+      "name": "disposition",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 4,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "ingestion_records",
+      "name": "candidate_digest",
+      "type": "character(64)",
+      "not_null": false,
+      "ordinal": 5,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "ingestion_records",
+      "name": "canonical_tx_id",
+      "type": "uuid",
+      "not_null": false,
+      "ordinal": 6,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "ingestion_records",
+      "name": "reason_code",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 7,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "ingestion_records",
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "ordinal": 8,
+      "default": "now()",
+      "identity": ""
+    },
+    {
+      "table": "operations_requests",
+      "name": "request_id",
+      "type": "uuid",
+      "not_null": true,
+      "ordinal": 1,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "operations_requests",
+      "name": "actor_subject",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 2,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "operations_requests",
+      "name": "action",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 3,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "operations_requests",
+      "name": "target",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 4,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "operations_requests",
+      "name": "request_digest",
+      "type": "character(64)",
+      "not_null": true,
+      "ordinal": 5,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "operations_requests",
+      "name": "state",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 6,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "operations_requests",
+      "name": "result",
+      "type": "jsonb",
+      "not_null": false,
+      "ordinal": 7,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "operations_requests",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "ordinal": 8,
+      "default": "now()",
+      "identity": ""
+    },
+    {
+      "table": "operations_requests",
+      "name": "completed_at",
+      "type": "timestamp with time zone",
+      "not_null": false,
+      "ordinal": 9,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "processed_transactions",
+      "name": "tx_id",
+      "type": "uuid",
+      "not_null": true,
+      "ordinal": 1,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "processed_transactions",
+      "name": "fingerprint",
+      "type": "character(64)",
+      "not_null": true,
+      "ordinal": 2,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "processed_transactions",
+      "name": "result",
+      "type": "jsonb",
+      "not_null": true,
+      "ordinal": 3,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "processed_transactions",
+      "name": "processed_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "ordinal": 4,
+      "default": "now()",
+      "identity": ""
+    },
+    {
+      "table": "projection_outbox",
+      "name": "tx_id",
+      "type": "uuid",
+      "not_null": true,
+      "ordinal": 1,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "projection_outbox",
+      "name": "state",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 2,
+      "default": "'PENDING'::text",
+      "identity": ""
+    },
+    {
+      "table": "projection_outbox",
+      "name": "completed_at",
+      "type": "timestamp with time zone",
+      "not_null": false,
+      "ordinal": 3,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_cases",
+      "name": "quarantine_id",
+      "type": "uuid",
+      "not_null": true,
+      "ordinal": 1,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_cases",
+      "name": "batch_id",
+      "type": "uuid",
+      "not_null": true,
+      "ordinal": 2,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_cases",
+      "name": "source_row",
+      "type": "integer",
+      "not_null": true,
+      "ordinal": 3,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_cases",
+      "name": "reason_code",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 4,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_cases",
+      "name": "reason_detail",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 5,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_cases",
+      "name": "validation_errors",
+      "type": "jsonb",
+      "not_null": true,
+      "ordinal": 6,
+      "default": "'[]'::jsonb",
+      "identity": ""
+    },
+    {
+      "table": "quarantine_cases",
+      "name": "candidate_account_id",
+      "type": "uuid",
+      "not_null": false,
+      "ordinal": 7,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_cases",
+      "name": "safe_payload_key",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 8,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_cases",
+      "name": "safe_payload_version",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 9,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_cases",
+      "name": "source_reference",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 10,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_cases",
+      "name": "quarantined_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "ordinal": 11,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "correction_id",
+      "type": "uuid",
+      "not_null": true,
+      "ordinal": 1,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "quarantine_id",
+      "type": "uuid",
+      "not_null": true,
+      "ordinal": 2,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "request_id",
+      "type": "uuid",
+      "not_null": true,
+      "ordinal": 3,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "request_digest",
+      "type": "character(64)",
+      "not_null": false,
+      "ordinal": 4,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "correction_version",
+      "type": "integer",
+      "not_null": true,
+      "ordinal": 5,
+      "default": "1",
+      "identity": ""
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "submitted_by",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 6,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "submitted_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "ordinal": 7,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "correction_notes",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 8,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "corrected_payload_key",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 9,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "corrected_payload_version",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 10,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "action",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 11,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "reprocess_batch_id",
+      "type": "uuid",
+      "not_null": false,
+      "ordinal": 12,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "reprocess_source_row",
+      "type": "integer",
+      "not_null": false,
+      "ordinal": 13,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_workflow",
+      "name": "quarantine_id",
+      "type": "uuid",
+      "not_null": false,
+      "ordinal": 1,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_workflow",
+      "name": "batch_id",
+      "type": "uuid",
+      "not_null": false,
+      "ordinal": 2,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_workflow",
+      "name": "source_row",
+      "type": "integer",
+      "not_null": false,
+      "ordinal": 3,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_workflow",
+      "name": "reason_code",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 4,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_workflow",
+      "name": "reason_detail",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 5,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_workflow",
+      "name": "validation_errors",
+      "type": "jsonb",
+      "not_null": false,
+      "ordinal": 6,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_workflow",
+      "name": "candidate_account_id",
+      "type": "uuid",
+      "not_null": false,
+      "ordinal": 7,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_workflow",
+      "name": "safe_payload_key",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 8,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_workflow",
+      "name": "safe_payload_version",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 9,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_workflow",
+      "name": "source_reference",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 10,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_workflow",
+      "name": "quarantined_at",
+      "type": "timestamp with time zone",
+      "not_null": false,
+      "ordinal": 11,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_workflow",
+      "name": "correction_id",
+      "type": "uuid",
+      "not_null": false,
+      "ordinal": 12,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_workflow",
+      "name": "canonical_tx_id",
+      "type": "uuid",
+      "not_null": false,
+      "ordinal": 13,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "quarantine_workflow",
+      "name": "workflow_status",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 14,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "risk_events",
+      "name": "risk_event_id",
+      "type": "bigint",
+      "not_null": true,
+      "ordinal": 1,
+      "default": "nextval('risk_events_risk_event_id_seq'::regclass)",
+      "identity": ""
+    },
+    {
+      "table": "risk_events",
+      "name": "tx_id",
+      "type": "uuid",
+      "not_null": true,
+      "ordinal": 2,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "risk_events",
+      "name": "risk_score",
+      "type": "integer",
+      "not_null": true,
+      "ordinal": 3,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "risk_events",
+      "name": "reason",
+      "type": "character varying(255)",
+      "not_null": true,
+      "ordinal": 4,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "risk_events",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "ordinal": 5,
+      "default": "now()",
+      "identity": ""
+    },
+    {
+      "table": "risk_review_history",
+      "name": "risk_event_id",
+      "type": "bigint",
+      "not_null": true,
+      "ordinal": 1,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "risk_review_history",
+      "name": "version",
+      "type": "integer",
+      "not_null": true,
+      "ordinal": 2,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "risk_review_history",
+      "name": "request_id",
+      "type": "uuid",
+      "not_null": true,
+      "ordinal": 3,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "risk_review_history",
+      "name": "request_digest",
+      "type": "character(64)",
+      "not_null": false,
+      "ordinal": 4,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "risk_review_history",
+      "name": "before_status",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 5,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "risk_review_history",
+      "name": "after_status",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 6,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "risk_review_history",
+      "name": "actor_subject",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 7,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "risk_review_history",
+      "name": "reviewer_subject",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 8,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "risk_review_history",
+      "name": "notes",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 9,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "risk_review_history",
+      "name": "resolution_code",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 10,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "risk_review_history",
+      "name": "changed_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "ordinal": 11,
+      "default": "now()",
+      "identity": ""
+    },
+    {
+      "table": "risk_reviews",
+      "name": "risk_event_id",
+      "type": "bigint",
+      "not_null": true,
+      "ordinal": 1,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "risk_reviews",
+      "name": "review_status",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 2,
+      "default": "'OPEN'::text",
+      "identity": ""
+    },
+    {
+      "table": "risk_reviews",
+      "name": "reviewer_subject",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 3,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "risk_reviews",
+      "name": "reviewed_by",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 4,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "risk_reviews",
+      "name": "reviewed_at",
+      "type": "timestamp with time zone",
+      "not_null": false,
+      "ordinal": 5,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "risk_reviews",
+      "name": "review_notes",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 6,
+      "default": "''::text",
+      "identity": ""
+    },
+    {
+      "table": "risk_reviews",
+      "name": "resolution_code",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 7,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "risk_reviews",
+      "name": "change_actor",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 8,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "risk_reviews",
+      "name": "change_request_id",
+      "type": "uuid",
+      "not_null": true,
+      "ordinal": 9,
+      "default": "gen_random_uuid()",
+      "identity": ""
+    },
+    {
+      "table": "risk_reviews",
+      "name": "request_digest",
+      "type": "character(64)",
+      "not_null": false,
+      "ordinal": 10,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "risk_reviews",
+      "name": "version",
+      "type": "integer",
+      "not_null": true,
+      "ordinal": 11,
+      "default": "1",
+      "identity": ""
+    },
+    {
+      "table": "risk_reviews",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "ordinal": 12,
+      "default": "now()",
+      "identity": ""
+    },
+    {
+      "table": "schema_migrations",
+      "name": "version",
+      "type": "integer",
+      "not_null": true,
+      "ordinal": 1,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "schema_migrations",
+      "name": "source_sha256",
+      "type": "character(64)",
+      "not_null": true,
+      "ordinal": 2,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "schema_migrations",
+      "name": "catalog_sha256",
+      "type": "character(64)",
+      "not_null": true,
+      "ordinal": 3,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "schema_migrations",
+      "name": "applied_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "ordinal": 4,
+      "default": "now()",
+      "identity": ""
+    },
+    {
+      "table": "transaction_lifecycle_events",
+      "name": "event_id",
+      "type": "bigint",
+      "not_null": true,
+      "ordinal": 1,
+      "default": null,
+      "identity": "a"
+    },
+    {
+      "table": "transaction_lifecycle_events",
+      "name": "batch_id",
+      "type": "uuid",
+      "not_null": true,
+      "ordinal": 2,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "transaction_lifecycle_events",
+      "name": "source_row",
+      "type": "integer",
+      "not_null": true,
+      "ordinal": 3,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "transaction_lifecycle_events",
+      "name": "sequence",
+      "type": "integer",
+      "not_null": true,
+      "ordinal": 4,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "transaction_lifecycle_events",
+      "name": "event_type",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 5,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "transaction_lifecycle_events",
+      "name": "occurred_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "ordinal": 6,
+      "default": "clock_timestamp()",
+      "identity": ""
+    },
+    {
+      "table": "transaction_lifecycle_events",
+      "name": "actor_subject",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 7,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "transaction_lifecycle_events",
+      "name": "error_type",
+      "type": "text",
+      "not_null": false,
+      "ordinal": 8,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "transactions",
+      "name": "tx_id",
+      "type": "uuid",
+      "not_null": true,
+      "ordinal": 1,
+      "default": "gen_random_uuid()",
+      "identity": ""
+    },
+    {
+      "table": "transactions",
+      "name": "account_id",
+      "type": "uuid",
+      "not_null": true,
+      "ordinal": 2,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "transactions",
+      "name": "amount",
+      "type": "numeric(15,2)",
+      "not_null": true,
+      "ordinal": 3,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "transactions",
+      "name": "currency",
+      "type": "character(3)",
+      "not_null": true,
+      "ordinal": 4,
+      "default": "'ZAR'::bpchar",
+      "identity": ""
+    },
+    {
+      "table": "transactions",
+      "name": "merchant",
+      "type": "character varying(200)",
+      "not_null": false,
+      "ordinal": 5,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "transactions",
+      "name": "tx_date",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "ordinal": 6,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "transactions",
+      "name": "tx_type",
+      "type": "character varying(30)",
+      "not_null": true,
+      "ordinal": 7,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "transactions",
+      "name": "cross_border",
+      "type": "boolean",
+      "not_null": true,
+      "ordinal": 8,
+      "default": "false",
+      "identity": ""
+    },
+    {
+      "table": "transactions",
+      "name": "raw_file",
+      "type": "text",
+      "not_null": true,
+      "ordinal": 9,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "transactions",
+      "name": "source_system",
+      "type": "character varying(100)",
+      "not_null": false,
+      "ordinal": 10,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "transactions",
+      "name": "source_transaction_id",
+      "type": "character varying(200)",
+      "not_null": false,
+      "ordinal": 11,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "transactions",
+      "name": "transaction_fingerprint",
+      "type": "character(64)",
+      "not_null": false,
+      "ordinal": 12,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "transactions",
+      "name": "batch_id",
+      "type": "uuid",
+      "not_null": false,
+      "ordinal": 13,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "transactions",
+      "name": "file_sha256",
+      "type": "character(64)",
+      "not_null": false,
+      "ordinal": 14,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "transactions",
+      "name": "source_row",
+      "type": "integer",
+      "not_null": false,
+      "ordinal": 15,
+      "default": null,
+      "identity": ""
+    },
+    {
+      "table": "transactions",
+      "name": "country",
+      "type": "character(2)",
+      "not_null": false,
+      "ordinal": 16,
+      "default": null,
+      "identity": ""
+    }
+  ],
+  "constraints": [
+    {
+      "table": "accounts",
+      "name": "accounts_account_type_check",
+      "kind": "c",
+      "definition": "CHECK (((account_type)::text = ANY ((ARRAY['cheque'::character varying, 'savings'::character varying, 'credit'::character varying, 'business'::character varying])::text[])))",
+      "columns": [
+        "account_type"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "accounts",
+      "name": "accounts_customer_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (customer_id) REFERENCES customers(customer_id) ON DELETE RESTRICT",
+      "columns": [
+        "customer_id"
+      ],
+      "reference_table": "customers",
+      "reference_columns": [
+        "customer_id"
+      ],
+      "cardinality": [
+        "1",
+        "0..*"
+      ]
+    },
+    {
+      "table": "accounts",
+      "name": "accounts_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (account_id)",
+      "columns": [
+        "account_id"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "alerts",
+      "name": "alerts_delivery_key_key",
+      "kind": "u",
+      "definition": "UNIQUE (delivery_key)",
+      "columns": [
+        "delivery_key"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "alerts",
+      "name": "alerts_delivery_state_check",
+      "kind": "c",
+      "definition": "CHECK (((delivery_state)::text = ANY ((ARRAY['PENDING'::character varying, 'SENDING'::character varying, 'SENT'::character varying, 'FAILED'::character varying, 'UNKNOWN'::character varying])::text[])))",
+      "columns": [
+        "delivery_state"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "alerts",
+      "name": "alerts_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (alert_id)",
+      "columns": [
+        "alert_id"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "alerts",
+      "name": "alerts_risk_event_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (risk_event_id) REFERENCES risk_events(risk_event_id)",
+      "columns": [
+        "risk_event_id"
+      ],
+      "reference_table": "risk_events",
+      "reference_columns": [
+        "risk_event_id"
+      ],
+      "cardinality": [
+        "1",
+        "0..*"
+      ]
+    },
+    {
+      "table": "correction_outbox",
+      "name": "correction_outbox_attempts_check",
+      "kind": "c",
+      "definition": "CHECK ((attempts >= 0))",
+      "columns": [
+        "attempts"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "correction_outbox",
+      "name": "correction_outbox_correction_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (correction_id) REFERENCES quarantine_corrections(correction_id)",
+      "columns": [
+        "correction_id"
+      ],
+      "reference_table": "quarantine_corrections",
+      "reference_columns": [
+        "correction_id"
+      ],
+      "cardinality": [
+        "1",
+        "0..1"
+      ]
+    },
+    {
+      "table": "correction_outbox",
+      "name": "correction_outbox_envelope_check",
+      "kind": "c",
+      "definition": "CHECK ((jsonb_typeof(envelope) = 'object'::text))",
+      "columns": [
+        "envelope"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "correction_outbox",
+      "name": "correction_outbox_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (correction_id)",
+      "columns": [
+        "correction_id"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "correction_outbox",
+      "name": "correction_outbox_state_check",
+      "kind": "c",
+      "definition": "CHECK ((state = ANY (ARRAY['PENDING'::text, 'COMPLETED'::text])))",
+      "columns": [
+        "state"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "customers",
+      "name": "customers_id_number_key",
+      "kind": "u",
+      "definition": "UNIQUE (id_number)",
+      "columns": [
+        "id_number"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "customers",
+      "name": "customers_kyc_status_check",
+      "kind": "c",
+      "definition": "CHECK (((kyc_status)::text = ANY ((ARRAY['pending'::character varying, 'verified'::character varying, 'rejected'::character varying, 'frozen'::character varying])::text[])))",
+      "columns": [
+        "kyc_status"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "customers",
+      "name": "customers_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (customer_id)",
+      "columns": [
+        "customer_id"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "ingestion_attempts",
+      "name": "ingestion_attempts_batch_id_attempt_id_key",
+      "kind": "u",
+      "definition": "UNIQUE (batch_id, attempt_id)",
+      "columns": [
+        "batch_id",
+        "attempt_id"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "ingestion_attempts",
+      "name": "ingestion_attempts_batch_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (batch_id) REFERENCES ingestion_batches(batch_id)",
+      "columns": [
+        "batch_id"
+      ],
+      "reference_table": "ingestion_batches",
+      "reference_columns": [
+        "batch_id"
+      ],
+      "cardinality": [
+        "0..1",
+        "0..*"
+      ]
+    },
+    {
+      "table": "ingestion_attempts",
+      "name": "ingestion_attempts_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (attempt_id)",
+      "columns": [
+        "attempt_id"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "ingestion_attempts",
+      "name": "ingestion_attempts_status_check",
+      "kind": "c",
+      "definition": "CHECK ((status = ANY (ARRAY['RECEIVED'::text, 'PROCESSING'::text, 'QUEUED'::text, 'DUPLICATE_FILE'::text, 'FAILED'::text])))",
+      "columns": [
+        "status"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "ingestion_batches",
+      "name": "ingestion_batches_file_sha256_check",
+      "kind": "c",
+      "definition": "CHECK ((file_sha256 ~ '^[0-9a-f]{64}$'::text))",
+      "columns": [
+        "file_sha256"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "ingestion_batches",
+      "name": "ingestion_batches_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (batch_id)",
+      "columns": [
+        "batch_id"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "ingestion_batches",
+      "name": "ingestion_batches_rows_received_check",
+      "kind": "c",
+      "definition": "CHECK ((rows_received >= 0))",
+      "columns": [
+        "rows_received"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "ingestion_batches",
+      "name": "ingestion_batches_source_bucket_check",
+      "kind": "c",
+      "definition": "CHECK ((length(source_bucket) > 0))",
+      "columns": [
+        "source_bucket"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "ingestion_batches",
+      "name": "ingestion_batches_source_bucket_file_sha256_key",
+      "kind": "u",
+      "definition": "UNIQUE (source_bucket, file_sha256)",
+      "columns": [
+        "source_bucket",
+        "file_sha256"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "ingestion_batches",
+      "name": "ingestion_batches_source_system_check",
+      "kind": "c",
+      "definition": "CHECK ((length(btrim((source_system)::text)) > 0))",
+      "columns": [
+        "source_system"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "ingestion_records",
+      "name": "ingestion_records_batch_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (batch_id) REFERENCES ingestion_batches(batch_id)",
+      "columns": [
+        "batch_id"
+      ],
+      "reference_table": "ingestion_batches",
+      "reference_columns": [
+        "batch_id"
+      ],
+      "cardinality": [
+        "1",
+        "0..*"
+      ]
+    },
+    {
+      "table": "ingestion_records",
+      "name": "ingestion_records_batch_id_source_attempt_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (batch_id, source_attempt_id) REFERENCES ingestion_attempts(batch_id, attempt_id)",
+      "columns": [
+        "batch_id",
+        "source_attempt_id"
+      ],
+      "reference_table": "ingestion_attempts",
+      "reference_columns": [
+        "batch_id",
+        "attempt_id"
+      ],
+      "cardinality": [
+        "1",
+        "0..*"
+      ]
+    },
+    {
+      "table": "ingestion_records",
+      "name": "ingestion_records_canonical_tx_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (canonical_tx_id) REFERENCES transactions(tx_id)",
+      "columns": [
+        "canonical_tx_id"
+      ],
+      "reference_table": "transactions",
+      "reference_columns": [
+        "tx_id"
+      ],
+      "cardinality": [
+        "0..1",
+        "0..*"
+      ]
+    },
+    {
+      "table": "ingestion_records",
+      "name": "ingestion_records_check",
+      "kind": "c",
+      "definition": "CHECK (((disposition <> 'ACCEPTED'::text) OR (canonical_tx_id IS NOT NULL)))",
+      "columns": [
+        "disposition",
+        "canonical_tx_id"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "ingestion_records",
+      "name": "ingestion_records_check1",
+      "kind": "c",
+      "definition": "CHECK (((disposition <> ALL (ARRAY['QUARANTINED'::text, 'DUPLICATE'::text, 'FAILED_TECHNICAL'::text])) OR ((length(btrim(reason_code)) > 0) AND (reason_code IS NOT NULL))))",
+      "columns": [
+        "disposition",
+        "reason_code"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "ingestion_records",
+      "name": "ingestion_records_disposition_check",
+      "kind": "c",
+      "definition": "CHECK ((disposition = ANY (ARRAY['RECEIVED'::text, 'QUEUED'::text, 'ACCEPTED'::text, 'QUARANTINED'::text, 'DUPLICATE'::text, 'FAILED_TECHNICAL'::text])))",
+      "columns": [
+        "disposition"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "ingestion_records",
+      "name": "ingestion_records_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (batch_id, source_row)",
+      "columns": [
+        "batch_id",
+        "source_row"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "ingestion_records",
+      "name": "ingestion_records_source_row_check",
+      "kind": "c",
+      "definition": "CHECK ((source_row >= 2))",
+      "columns": [
+        "source_row"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "operations_requests",
+      "name": "operations_requests_action_check",
+      "kind": "c",
+      "definition": "CHECK ((action = ANY (ARRAY['REBUILD_PROJECTION'::text, 'RETRY_CORRECTION'::text, 'REDRIVE'::text])))",
+      "columns": [
+        "action"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "operations_requests",
+      "name": "operations_requests_actor_subject_check",
+      "kind": "c",
+      "definition": "CHECK (((length(actor_subject) >= 1) AND (length(actor_subject) <= 200)))",
+      "columns": [
+        "actor_subject"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "operations_requests",
+      "name": "operations_requests_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (request_id)",
+      "columns": [
+        "request_id"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "operations_requests",
+      "name": "operations_requests_state_check",
+      "kind": "c",
+      "definition": "CHECK ((state = ANY (ARRAY['RUNNING'::text, 'COMPLETED'::text, 'FAILED'::text])))",
+      "columns": [
+        "state"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "processed_transactions",
+      "name": "processed_transactions_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (tx_id)",
+      "columns": [
+        "tx_id"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "processed_transactions",
+      "name": "processed_transactions_tx_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (tx_id) REFERENCES transactions(tx_id)",
+      "columns": [
+        "tx_id"
+      ],
+      "reference_table": "transactions",
+      "reference_columns": [
+        "tx_id"
+      ],
+      "cardinality": [
+        "1",
+        "0..1"
+      ]
+    },
+    {
+      "table": "projection_outbox",
+      "name": "projection_outbox_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (tx_id)",
+      "columns": [
+        "tx_id"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "projection_outbox",
+      "name": "projection_outbox_state_check",
+      "kind": "c",
+      "definition": "CHECK ((state = ANY (ARRAY['PENDING'::text, 'COMPLETED'::text])))",
+      "columns": [
+        "state"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "projection_outbox",
+      "name": "projection_outbox_tx_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (tx_id) REFERENCES processed_transactions(tx_id)",
+      "columns": [
+        "tx_id"
+      ],
+      "reference_table": "processed_transactions",
+      "reference_columns": [
+        "tx_id"
+      ],
+      "cardinality": [
+        "1",
+        "0..1"
+      ]
+    },
+    {
+      "table": "quarantine_cases",
+      "name": "quarantine_cases_batch_id_source_row_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (batch_id, source_row) REFERENCES ingestion_records(batch_id, source_row)",
+      "columns": [
+        "batch_id",
+        "source_row"
+      ],
+      "reference_table": "ingestion_records",
+      "reference_columns": [
+        "batch_id",
+        "source_row"
+      ],
+      "cardinality": [
+        "1",
+        "0..1"
+      ]
+    },
+    {
+      "table": "quarantine_cases",
+      "name": "quarantine_cases_batch_id_source_row_key",
+      "kind": "u",
+      "definition": "UNIQUE (batch_id, source_row)",
+      "columns": [
+        "batch_id",
+        "source_row"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "quarantine_cases",
+      "name": "quarantine_cases_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (quarantine_id)",
+      "columns": [
+        "quarantine_id"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "quarantine_cases",
+      "name": "quarantine_cases_reason_code_check",
+      "kind": "c",
+      "definition": "CHECK ((length(btrim(reason_code)) > 0))",
+      "columns": [
+        "reason_code"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "quarantine_cases",
+      "name": "quarantine_cases_reason_detail_check",
+      "kind": "c",
+      "definition": "CHECK ((length(btrim(reason_detail)) > 0))",
+      "columns": [
+        "reason_detail"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "quarantine_cases",
+      "name": "quarantine_cases_safe_payload_key_check",
+      "kind": "c",
+      "definition": "CHECK ((length(safe_payload_key) > 0))",
+      "columns": [
+        "safe_payload_key"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "quarantine_cases",
+      "name": "quarantine_cases_safe_payload_version_check",
+      "kind": "c",
+      "definition": "CHECK ((length(safe_payload_version) > 0))",
+      "columns": [
+        "safe_payload_version"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "quarantine_cases",
+      "name": "quarantine_cases_validation_errors_check",
+      "kind": "c",
+      "definition": "CHECK ((jsonb_typeof(validation_errors) = 'array'::text))",
+      "columns": [
+        "validation_errors"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "quarantine_corrections_action_check",
+      "kind": "c",
+      "definition": "CHECK ((action = ANY (ARRAY['RESUBMIT'::text, 'REJECT'::text])))",
+      "columns": [
+        "action"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "quarantine_corrections_check",
+      "kind": "c",
+      "definition": "CHECK ((((action = 'REJECT'::text) AND (corrected_payload_key IS NULL) AND (corrected_payload_version IS NULL) AND (reprocess_batch_id IS NULL) AND (reprocess_source_row IS NULL)) OR ((action = 'RESUBMIT'::text) AND (length(corrected_payload_key) > 0) AND (corrected_payload_key IS NOT NULL) AND (length(corrected_payload_version) > 0) AND (corrected_payload_version IS NOT NULL) AND (reprocess_batch_id IS NOT NULL) AND (reprocess_source_row IS NOT NULL))))",
+      "columns": [
+        "action",
+        "corrected_payload_key",
+        "corrected_payload_version",
+        "reprocess_batch_id",
+        "reprocess_source_row"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "quarantine_corrections_correction_notes_check",
+      "kind": "c",
+      "definition": "CHECK ((length(btrim(correction_notes)) > 0))",
+      "columns": [
+        "correction_notes"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "quarantine_corrections_correction_version_check",
+      "kind": "c",
+      "definition": "CHECK ((correction_version > 0))",
+      "columns": [
+        "correction_version"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "quarantine_corrections_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (correction_id)",
+      "columns": [
+        "correction_id"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "quarantine_corrections_quarantine_id_correction_version_key",
+      "kind": "u",
+      "definition": "UNIQUE (quarantine_id, correction_version)",
+      "columns": [
+        "quarantine_id",
+        "correction_version"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "quarantine_corrections_quarantine_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (quarantine_id) REFERENCES quarantine_cases(quarantine_id)",
+      "columns": [
+        "quarantine_id"
+      ],
+      "reference_table": "quarantine_cases",
+      "reference_columns": [
+        "quarantine_id"
+      ],
+      "cardinality": [
+        "1",
+        "0..*"
+      ]
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "quarantine_corrections_reprocess_batch_id_reprocess_source_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (reprocess_batch_id, reprocess_source_row) REFERENCES ingestion_records(batch_id, source_row)",
+      "columns": [
+        "reprocess_batch_id",
+        "reprocess_source_row"
+      ],
+      "reference_table": "ingestion_records",
+      "reference_columns": [
+        "batch_id",
+        "source_row"
+      ],
+      "cardinality": [
+        "0..1",
+        "0..*"
+      ]
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "quarantine_corrections_request_id_key",
+      "kind": "u",
+      "definition": "UNIQUE (request_id)",
+      "columns": [
+        "request_id"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "quarantine_corrections_submitted_by_check",
+      "kind": "c",
+      "definition": "CHECK ((length(btrim(submitted_by)) > 0))",
+      "columns": [
+        "submitted_by"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "risk_events",
+      "name": "risk_events_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (risk_event_id)",
+      "columns": [
+        "risk_event_id"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "risk_events",
+      "name": "risk_events_risk_score_check",
+      "kind": "c",
+      "definition": "CHECK (((risk_score >= 0) AND (risk_score <= 100)))",
+      "columns": [
+        "risk_score"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "risk_events",
+      "name": "risk_events_tx_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (tx_id) REFERENCES transactions(tx_id)",
+      "columns": [
+        "tx_id"
+      ],
+      "reference_table": "transactions",
+      "reference_columns": [
+        "tx_id"
+      ],
+      "cardinality": [
+        "1",
+        "0..*"
+      ]
+    },
+    {
+      "table": "risk_review_history",
+      "name": "risk_review_history_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (risk_event_id, version)",
+      "columns": [
+        "risk_event_id",
+        "version"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "risk_review_history",
+      "name": "risk_review_history_request_id_key",
+      "kind": "u",
+      "definition": "UNIQUE (request_id)",
+      "columns": [
+        "request_id"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "risk_review_history",
+      "name": "risk_review_history_risk_event_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (risk_event_id) REFERENCES risk_reviews(risk_event_id)",
+      "columns": [
+        "risk_event_id"
+      ],
+      "reference_table": "risk_reviews",
+      "reference_columns": [
+        "risk_event_id"
+      ],
+      "cardinality": [
+        "1",
+        "0..*"
+      ]
+    },
+    {
+      "table": "risk_reviews",
+      "name": "risk_reviews_change_actor_check",
+      "kind": "c",
+      "definition": "CHECK ((length(btrim(change_actor)) > 0))",
+      "columns": [
+        "change_actor"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "risk_reviews",
+      "name": "risk_reviews_check",
+      "kind": "c",
+      "definition": "CHECK (((review_status = 'OPEN'::text) OR ((length(btrim(reviewer_subject)) > 0) AND (reviewer_subject IS NOT NULL))))",
+      "columns": [
+        "review_status",
+        "reviewer_subject"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "risk_reviews",
+      "name": "risk_reviews_check1",
+      "kind": "c",
+      "definition": "CHECK (((review_status <> ALL (ARRAY['CLEARED'::text, 'CONFIRMED_RISK'::text, 'ESCALATED'::text])) OR ((reviewed_by IS NOT NULL) AND (reviewed_at IS NOT NULL) AND\nCASE review_status\n    WHEN 'CLEARED'::text THEN (resolution_code = 'VALID_ACTIVITY'::text)\n    WHEN 'CONFIRMED_RISK'::text THEN (resolution_code = 'CONFIRMED_SUSPICIOUS'::text)\n    ELSE (resolution_code = 'SPECIALIST_REVIEW'::text)\nEND AND (resolution_code IS NOT NULL))))",
+      "columns": [
+        "review_status",
+        "reviewed_by",
+        "reviewed_at",
+        "resolution_code"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "risk_reviews",
+      "name": "risk_reviews_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (risk_event_id)",
+      "columns": [
+        "risk_event_id"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "risk_reviews",
+      "name": "risk_reviews_review_status_check",
+      "kind": "c",
+      "definition": "CHECK ((review_status = ANY (ARRAY['OPEN'::text, 'UNDER_REVIEW'::text, 'CLEARED'::text, 'CONFIRMED_RISK'::text, 'ESCALATED'::text])))",
+      "columns": [
+        "review_status"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "risk_reviews",
+      "name": "risk_reviews_risk_event_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (risk_event_id) REFERENCES risk_events(risk_event_id)",
+      "columns": [
+        "risk_event_id"
+      ],
+      "reference_table": "risk_events",
+      "reference_columns": [
+        "risk_event_id"
+      ],
+      "cardinality": [
+        "1",
+        "0..1"
+      ]
+    },
+    {
+      "table": "risk_reviews",
+      "name": "risk_reviews_version_check",
+      "kind": "c",
+      "definition": "CHECK ((version > 0))",
+      "columns": [
+        "version"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "schema_migrations",
+      "name": "schema_migrations_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (version)",
+      "columns": [
+        "version"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "transaction_lifecycle_events",
+      "name": "transaction_lifecycle_events_actor_subject_check",
+      "kind": "c",
+      "definition": "CHECK ((actor_subject = 'scoring-worker'::text))",
+      "columns": [
+        "actor_subject"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "transaction_lifecycle_events",
+      "name": "transaction_lifecycle_events_batch_id_source_row_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (batch_id, source_row) REFERENCES ingestion_records(batch_id, source_row)",
+      "columns": [
+        "batch_id",
+        "source_row"
+      ],
+      "reference_table": "ingestion_records",
+      "reference_columns": [
+        "batch_id",
+        "source_row"
+      ],
+      "cardinality": [
+        "1",
+        "0..*"
+      ]
+    },
+    {
+      "table": "transaction_lifecycle_events",
+      "name": "transaction_lifecycle_events_batch_id_source_row_sequence_key",
+      "kind": "u",
+      "definition": "UNIQUE (batch_id, source_row, sequence)",
+      "columns": [
+        "batch_id",
+        "source_row",
+        "sequence"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "transaction_lifecycle_events",
+      "name": "transaction_lifecycle_events_error_type_check",
+      "kind": "c",
+      "definition": "CHECK ((error_type ~ '^[A-Za-z_][A-Za-z0-9_]{0,99}$'::text))",
+      "columns": [
+        "error_type"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "transaction_lifecycle_events",
+      "name": "transaction_lifecycle_events_event_type_check",
+      "kind": "c",
+      "definition": "CHECK ((event_type = ANY (ARRAY['RECEIVED'::text, 'QUEUED'::text, 'VALIDATED'::text, 'REVALIDATED'::text, 'SCORED'::text, 'STORED'::text, 'QUARANTINED'::text, 'DUPLICATE'::text, 'TECHNICAL_FAILURE'::text, 'RETRY'::text, 'RECOVERED'::text, 'DLQ'::text])))",
+      "columns": [
+        "event_type"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "transaction_lifecycle_events",
+      "name": "transaction_lifecycle_events_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (event_id)",
+      "columns": [
+        "event_id"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "transaction_lifecycle_events",
+      "name": "transaction_lifecycle_events_sequence_check",
+      "kind": "c",
+      "definition": "CHECK ((sequence > 0))",
+      "columns": [
+        "sequence"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "transactions",
+      "name": "transactions_account_id_fkey",
+      "kind": "f",
+      "definition": "FOREIGN KEY (account_id) REFERENCES accounts(account_id) ON DELETE RESTRICT",
+      "columns": [
+        "account_id"
+      ],
+      "reference_table": "accounts",
+      "reference_columns": [
+        "account_id"
+      ],
+      "cardinality": [
+        "1",
+        "0..*"
+      ]
+    },
+    {
+      "table": "transactions",
+      "name": "transactions_amount_check",
+      "kind": "c",
+      "definition": "CHECK ((amount > (0)::numeric))",
+      "columns": [
+        "amount"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "transactions",
+      "name": "transactions_currency_check",
+      "kind": "c",
+      "definition": "CHECK ((currency = ANY (ARRAY['ZAR'::bpchar, 'USD'::bpchar, 'EUR'::bpchar, 'GBP'::bpchar, 'KES'::bpchar])))",
+      "columns": [
+        "currency"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "transactions",
+      "name": "transactions_file_sha256_check",
+      "kind": "c",
+      "definition": "CHECK ((file_sha256 ~ '^[0-9a-f]{64}$'::text))",
+      "columns": [
+        "file_sha256"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "transactions",
+      "name": "transactions_pkey",
+      "kind": "p",
+      "definition": "PRIMARY KEY (tx_id)",
+      "columns": [
+        "tx_id"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "transactions",
+      "name": "transactions_source_identity_check",
+      "kind": "c",
+      "definition": "CHECK (((source_transaction_id IS NULL) OR ((length(btrim((source_transaction_id)::text)) > 0) AND (length(btrim((source_system)::text)) > 0) AND (source_system IS NOT NULL))))",
+      "columns": [
+        "source_transaction_id",
+        "source_system"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "transactions",
+      "name": "transactions_source_row_check",
+      "kind": "c",
+      "definition": "CHECK ((source_row >= 2))",
+      "columns": [
+        "source_row"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "transactions",
+      "name": "transactions_transaction_fingerprint_check",
+      "kind": "c",
+      "definition": "CHECK ((transaction_fingerprint ~ '^[0-9a-f]{64}$'::text))",
+      "columns": [
+        "transaction_fingerprint"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    },
+    {
+      "table": "transactions",
+      "name": "transactions_tx_type_check",
+      "kind": "c",
+      "definition": "CHECK (((tx_type)::text = ANY ((ARRAY['debit'::character varying, 'credit'::character varying, 'transfer'::character varying, 'fee'::character varying])::text[])))",
+      "columns": [
+        "tx_type"
+      ],
+      "reference_table": null,
+      "reference_columns": null
+    }
+  ],
+  "indexes": [
+    {
+      "table": "accounts",
+      "name": "accounts_pkey",
+      "definition": "CREATE UNIQUE INDEX accounts_pkey ON public.accounts USING btree (account_id)"
+    },
+    {
+      "table": "alerts",
+      "name": "alerts_delivery_key_key",
+      "definition": "CREATE UNIQUE INDEX alerts_delivery_key_key ON public.alerts USING btree (delivery_key)"
+    },
+    {
+      "table": "alerts",
+      "name": "alerts_pkey",
+      "definition": "CREATE UNIQUE INDEX alerts_pkey ON public.alerts USING btree (alert_id)"
+    },
+    {
+      "table": "correction_outbox",
+      "name": "correction_outbox_pkey",
+      "definition": "CREATE UNIQUE INDEX correction_outbox_pkey ON public.correction_outbox USING btree (correction_id)"
+    },
+    {
+      "table": "customers",
+      "name": "customers_id_number_key",
+      "definition": "CREATE UNIQUE INDEX customers_id_number_key ON public.customers USING btree (id_number)"
+    },
+    {
+      "table": "customers",
+      "name": "customers_pkey",
+      "definition": "CREATE UNIQUE INDEX customers_pkey ON public.customers USING btree (customer_id)"
+    },
+    {
+      "table": "ingestion_attempts",
+      "name": "ingestion_attempts_batch_id_attempt_id_key",
+      "definition": "CREATE UNIQUE INDEX ingestion_attempts_batch_id_attempt_id_key ON public.ingestion_attempts USING btree (batch_id, attempt_id)"
+    },
+    {
+      "table": "ingestion_attempts",
+      "name": "ingestion_attempts_pkey",
+      "definition": "CREATE UNIQUE INDEX ingestion_attempts_pkey ON public.ingestion_attempts USING btree (attempt_id)"
+    },
+    {
+      "table": "ingestion_batches",
+      "name": "ingestion_batches_pkey",
+      "definition": "CREATE UNIQUE INDEX ingestion_batches_pkey ON public.ingestion_batches USING btree (batch_id)"
+    },
+    {
+      "table": "ingestion_batches",
+      "name": "ingestion_batches_source_bucket_file_sha256_key",
+      "definition": "CREATE UNIQUE INDEX ingestion_batches_source_bucket_file_sha256_key ON public.ingestion_batches USING btree (source_bucket, file_sha256)"
+    },
+    {
+      "table": "ingestion_records",
+      "name": "ingestion_records_pkey",
+      "definition": "CREATE UNIQUE INDEX ingestion_records_pkey ON public.ingestion_records USING btree (batch_id, source_row)"
+    },
+    {
+      "table": "ingestion_records",
+      "name": "ingestion_records_tx",
+      "definition": "CREATE INDEX ingestion_records_tx ON public.ingestion_records USING btree (canonical_tx_id) WHERE (canonical_tx_id IS NOT NULL)"
+    },
+    {
+      "table": "operations_requests",
+      "name": "operations_requests_pkey",
+      "definition": "CREATE UNIQUE INDEX operations_requests_pkey ON public.operations_requests USING btree (request_id)"
+    },
+    {
+      "table": "processed_transactions",
+      "name": "processed_transactions_pkey",
+      "definition": "CREATE UNIQUE INDEX processed_transactions_pkey ON public.processed_transactions USING btree (tx_id)"
+    },
+    {
+      "table": "projection_outbox",
+      "name": "projection_outbox_pkey",
+      "definition": "CREATE UNIQUE INDEX projection_outbox_pkey ON public.projection_outbox USING btree (tx_id)"
+    },
+    {
+      "table": "quarantine_cases",
+      "name": "quarantine_cases_batch_id_source_row_key",
+      "definition": "CREATE UNIQUE INDEX quarantine_cases_batch_id_source_row_key ON public.quarantine_cases USING btree (batch_id, source_row)"
+    },
+    {
+      "table": "quarantine_cases",
+      "name": "quarantine_cases_pkey",
+      "definition": "CREATE UNIQUE INDEX quarantine_cases_pkey ON public.quarantine_cases USING btree (quarantine_id)"
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "correction_case_time",
+      "definition": "CREATE INDEX correction_case_time ON public.quarantine_corrections USING btree (quarantine_id, submitted_at, correction_id)"
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "quarantine_corrections_pkey",
+      "definition": "CREATE UNIQUE INDEX quarantine_corrections_pkey ON public.quarantine_corrections USING btree (correction_id)"
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "quarantine_corrections_quarantine_id_correction_version_key",
+      "definition": "CREATE UNIQUE INDEX quarantine_corrections_quarantine_id_correction_version_key ON public.quarantine_corrections USING btree (quarantine_id, correction_version)"
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "quarantine_corrections_request_id_key",
+      "definition": "CREATE UNIQUE INDEX quarantine_corrections_request_id_key ON public.quarantine_corrections USING btree (request_id)"
+    },
+    {
+      "table": "quarantine_corrections",
+      "name": "quarantine_one_active_resolution",
+      "definition": "CREATE UNIQUE INDEX quarantine_one_active_resolution ON public.quarantine_corrections USING btree (quarantine_id) WHERE (action = 'REJECT'::text)"
+    },
+    {
+      "table": "risk_events",
+      "name": "idx_risk_events_tx_date",
+      "definition": "CREATE INDEX idx_risk_events_tx_date ON public.risk_events USING btree (tx_id, created_at DESC)"
+    },
+    {
+      "table": "risk_events",
+      "name": "risk_events_pkey",
+      "definition": "CREATE UNIQUE INDEX risk_events_pkey ON public.risk_events USING btree (risk_event_id)"
+    },
+    {
+      "table": "risk_review_history",
+      "name": "risk_review_history_pkey",
+      "definition": "CREATE UNIQUE INDEX risk_review_history_pkey ON public.risk_review_history USING btree (risk_event_id, version)"
+    },
+    {
+      "table": "risk_review_history",
+      "name": "risk_review_history_request_id_key",
+      "definition": "CREATE UNIQUE INDEX risk_review_history_request_id_key ON public.risk_review_history USING btree (request_id)"
+    },
+    {
+      "table": "risk_reviews",
+      "name": "risk_reviews_assignee_queue",
+      "definition": "CREATE INDEX risk_reviews_assignee_queue ON public.risk_reviews USING btree (reviewer_subject, review_status, created_at, risk_event_id)"
+    },
+    {
+      "table": "risk_reviews",
+      "name": "risk_reviews_pkey",
+      "definition": "CREATE UNIQUE INDEX risk_reviews_pkey ON public.risk_reviews USING btree (risk_event_id)"
+    },
+    {
+      "table": "risk_reviews",
+      "name": "risk_reviews_queue",
+      "definition": "CREATE INDEX risk_reviews_queue ON public.risk_reviews USING btree (review_status, created_at, risk_event_id)"
+    },
+    {
+      "table": "schema_migrations",
+      "name": "schema_migrations_pkey",
+      "definition": "CREATE UNIQUE INDEX schema_migrations_pkey ON public.schema_migrations USING btree (version)"
+    },
+    {
+      "table": "transaction_lifecycle_events",
+      "name": "lifecycle_business_once",
+      "definition": "CREATE UNIQUE INDEX lifecycle_business_once ON public.transaction_lifecycle_events USING btree (batch_id, source_row, event_type) WHERE (event_type <> ALL (ARRAY['TECHNICAL_FAILURE'::text, 'RETRY'::text, 'RECOVERED'::text]))"
+    },
+    {
+      "table": "transaction_lifecycle_events",
+      "name": "transaction_lifecycle_events_batch_id_source_row_sequence_key",
+      "definition": "CREATE UNIQUE INDEX transaction_lifecycle_events_batch_id_source_row_sequence_key ON public.transaction_lifecycle_events USING btree (batch_id, source_row, sequence)"
+    },
+    {
+      "table": "transaction_lifecycle_events",
+      "name": "transaction_lifecycle_events_pkey",
+      "definition": "CREATE UNIQUE INDEX transaction_lifecycle_events_pkey ON public.transaction_lifecycle_events USING btree (event_id)"
+    },
+    {
+      "table": "transactions",
+      "name": "idx_tx_account_cursor",
+      "definition": "CREATE INDEX idx_tx_account_cursor ON public.transactions USING btree (account_id, tx_date DESC, tx_id DESC)"
+    },
+    {
+      "table": "transactions",
+      "name": "idx_tx_account_date",
+      "definition": "CREATE INDEX idx_tx_account_date ON public.transactions USING btree (account_id, tx_date DESC)"
+    },
+    {
+      "table": "transactions",
+      "name": "idx_tx_crossborder",
+      "definition": "CREATE INDEX idx_tx_crossborder ON public.transactions USING btree (cross_border) WHERE (cross_border = true)"
+    },
+    {
+      "table": "transactions",
+      "name": "idx_tx_duplicate_charge",
+      "definition": "CREATE INDEX idx_tx_duplicate_charge ON public.transactions USING btree (account_id, merchant, currency, amount, tx_date) WHERE (source_transaction_id IS NOT NULL)"
+    },
+    {
+      "table": "transactions",
+      "name": "idx_tx_high_amount",
+      "definition": "CREATE INDEX idx_tx_high_amount ON public.transactions USING btree (amount) WHERE (amount > (50000)::numeric)"
+    },
+    {
+      "table": "transactions",
+      "name": "idx_tx_source_identity",
+      "definition": "CREATE UNIQUE INDEX idx_tx_source_identity ON public.transactions USING btree (source_system, account_id, source_transaction_id) WHERE (source_transaction_id IS NOT NULL)"
+    },
+    {
+      "table": "transactions",
+      "name": "transactions_pkey",
+      "definition": "CREATE UNIQUE INDEX transactions_pkey ON public.transactions USING btree (tx_id)"
+    }
+  ],
+  "views": [
+    {
+      "name": "batch_reconciliation",
+      "definition": " WITH counts AS (\n         SELECT b.batch_id,\n            b.rows_received,\n            b.publication_complete,\n            b.file_failure_code,\n            count(r.source_row) AS recorded,\n            count(*) FILTER (WHERE (r.disposition = 'ACCEPTED'::text)) AS accepted,\n            count(*) FILTER (WHERE (r.disposition = 'QUARANTINED'::text)) AS quarantined,\n            count(*) FILTER (WHERE (r.disposition = 'DUPLICATE'::text)) AS duplicate,\n            count(*) FILTER (WHERE (r.disposition = 'FAILED_TECHNICAL'::text)) AS failed_technical\n           FROM (ingestion_batches b\n             LEFT JOIN ingestion_records r USING (batch_id))\n          GROUP BY b.batch_id\n        ), reconciled AS (\n         SELECT counts.batch_id,\n            counts.rows_received,\n            counts.publication_complete,\n            counts.file_failure_code,\n            counts.recorded,\n            counts.accepted,\n            counts.quarantined,\n            counts.duplicate,\n            counts.failed_technical,\n            ((((counts.rows_received - counts.accepted) - counts.quarantined) - counts.duplicate) - counts.failed_technical) AS pending,\n            ((counts.rows_received IS NOT NULL) AND (counts.recorded <= counts.rows_received)) AS counts_consistent\n           FROM counts\n        )\n SELECT batch_id,\n    rows_received,\n    publication_complete,\n    file_failure_code,\n    recorded,\n    accepted,\n    quarantined,\n    duplicate,\n    failed_technical,\n    pending,\n    counts_consistent,\n        CASE\n            WHEN (NOT counts_consistent) THEN\n            CASE\n                WHEN (file_failure_code IS NOT NULL) THEN 'FAILED'::text\n                ELSE 'RECEIVED'::text\n            END\n            WHEN ((file_failure_code IS NOT NULL) OR (failed_technical > 0)) THEN\n            CASE\n                WHEN (((accepted + quarantined) + duplicate) > 0) THEN 'PARTIAL'::text\n                ELSE 'FAILED'::text\n            END\n            WHEN (pending > 0) THEN\n            CASE\n                WHEN publication_complete THEN 'QUEUED'::text\n                ELSE 'PROCESSING'::text\n            END\n            ELSE 'COMPLETED'::text\n        END AS status\n   FROM reconciled;"
+    },
+    {
+      "name": "quarantine_workflow",
+      "definition": " SELECT q.quarantine_id,\n    q.batch_id,\n    q.source_row,\n    q.reason_code,\n    q.reason_detail,\n    q.validation_errors,\n    q.candidate_account_id,\n    q.safe_payload_key,\n    q.safe_payload_version,\n    q.source_reference,\n    q.quarantined_at,\n    c.correction_id,\n    r.canonical_tx_id,\n        CASE\n            WHEN (c.correction_id IS NULL) THEN 'OPEN'::text\n            WHEN (c.action = 'REJECT'::text) THEN 'REJECTED'::text\n            WHEN (r.disposition = ANY (ARRAY['ACCEPTED'::text, 'DUPLICATE'::text])) THEN 'RESOLVED'::text\n            WHEN (r.disposition = 'QUARANTINED'::text) THEN 'OPEN'::text\n            ELSE 'RESUBMITTED'::text\n        END AS workflow_status\n   FROM ((quarantine_cases q\n     LEFT JOIN LATERAL ( SELECT c_1.correction_id,\n            c_1.quarantine_id,\n            c_1.request_id,\n            c_1.request_digest,\n            c_1.correction_version,\n            c_1.submitted_by,\n            c_1.submitted_at,\n            c_1.correction_notes,\n            c_1.corrected_payload_key,\n            c_1.corrected_payload_version,\n            c_1.action,\n            c_1.reprocess_batch_id,\n            c_1.reprocess_source_row\n           FROM quarantine_corrections c_1\n          WHERE (c_1.quarantine_id = q.quarantine_id)\n          ORDER BY c_1.correction_version DESC\n         LIMIT 1) c ON (true))\n     LEFT JOIN ingestion_records r ON (((r.batch_id = c.reprocess_batch_id) AND (r.source_row = c.reprocess_source_row))));"
+    }
+  ],
+  "provenance": {
+    "commit": "4a8ad8af275d8ee039873b4b2036e0f09c182b16",
+    "scope": "Submitted base schema and migrations 001 through 006, reconstructed without customer data",
+    "catalog_validation": "Isolated PostgreSQL 18. Retained PostgreSQL 16 workflow column contract compared separately.",
+    "live_rds_queried": false
+  },
+  "source_url": "https://github.com/Nompil/fintrust/tree/4a8ad8af275d8ee039873b4b2036e0f09c182b16",
+  "table_count": 18,
+  "foreign_key_count": 17,
+  "notes": [
+    "transactions.batch_id is lineage, not a declared foreign key.",
+    "candidate_account_id and subject names are not SQL foreign keys.",
+    "Cognito holds application identities. DynamoDB holds current cloud alert claims.",
+    "alerts is the retained relational legacy/direct-path table.",
+    "batch_reconciliation and quarantine_workflow are derived views, not tables.",
+    "Frozen JSON assessments and outboxes intentionally preserve audit and recovery state."
+  ]
+}

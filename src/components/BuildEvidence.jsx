@@ -3,6 +3,7 @@ import { EvidenceImage } from './Evidence.jsx';
 import { TechnicalLauncher } from './TechnicalEvidence.jsx';
 import { integrationAssetBase, integrationCaptures } from './IntegrationCaptures.jsx';
 import { FlowArrow, VisualIcon } from './VisualIcons.jsx';
+import { CurrentErdLauncher } from './CurrentErd.jsx';
 
 const resourceBase = `${import.meta.env.BASE_URL}resources/`;
 
@@ -16,7 +17,7 @@ export function IntegrationSlide({ active, assetBase, onNavigate }) {
 }
 
 export function DataModelSlide({ active, assetBase, onNavigate }) {
-  return <><div className="build-evidence-layout"><article className="build-evidence-story"><span>DATA RELATIONSHIPS</span><h3>How the records connect</h3><ul><li>Customers and accounts show who the transaction belongs to.</li><li>Each transaction links to its risk score and reasons.</li><li>Reviews and history keep the Analyst’s actions and decision.</li><li>Batch and quarantine records keep the original file, row and check results.</li></ul><p className="build-evidence-note">This core model sets out the main relationships. The baseline implementation ERD adds technical detail; later workflow and recovery extensions are not all shown.</p><TechnicalLauncher topic="sql" label="Inspect implementation ERD & SQL" active={active} assetBase={assetBase} /></article><EvidenceImage src="core-data-model.png" assetBase={resourceBase} alt="Imbokodo Risk and Compliance Workbench core data model ERD" caption="My core data model groups the main business records. The implementation uses UUID IDs and the table names risk_reviews and risk_review_history." label="Expand core data model" active={active} /></div><div className="build-evidence-actions"><button className="technical-launch" onClick={() => onNavigate('business-analysis')}>Wireframe & business analysis</button><button className="technical-launch" onClick={() => onNavigate('sql-evidence')}>Continue to SQL evidence →</button></div><BuildProgress /></>;
+  return <><div className="build-evidence-layout"><article className="build-evidence-story"><span>DATA RELATIONSHIPS</span><h3>How the records connect</h3><ul><li>Customers and accounts connect to accepted transactions.</li><li>Risk events connect to reviews and decision history.</li><li>Ingestion and lifecycle records trace each source row.</li><li>Quarantine, corrections and outboxes support safe recovery.</li></ul><p className="build-evidence-note">The complete model has 18 tables and 17 foreign keys. Two workflow views calculate status from saved records.</p><TechnicalLauncher topic="sql" label="Inspect SQL & data integrity" active={active} assetBase={assetBase} /></article><CurrentErdLauncher preview active={active} label="Expand current ERD and all 18 tables" /></div><div className="build-evidence-actions"><button className="technical-launch" onClick={() => onNavigate('business-analysis')}>Wireframe & business analysis</button><button className="technical-launch" onClick={() => onNavigate('sql-evidence')}>Continue to SQL evidence →</button></div><BuildProgress /></>;
 }
 
 export function SqlBuildSlide({ active, assetBase, onNavigate }) {
