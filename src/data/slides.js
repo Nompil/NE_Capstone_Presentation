@@ -126,8 +126,8 @@ const slideContent = [
       'A defined scope and a clear journey from upload to decision.',
       'Separate paths for bad data, business risk and technical failures.'
     ],
-    diagram: 'image-6-1.png',
-    proof: 'Traces file validation, duplicate handling, quarantine, scoring and visible outcomes.'
+    diagram: 'activity-overview.svg',
+    proof: 'Valid rows are scored and saved. Bad rows are held for correction. The Analyst reviews MEDIUM and HIGH risk; HIGH also triggers an alert.'
   },
   {
     id: 'solution-design',

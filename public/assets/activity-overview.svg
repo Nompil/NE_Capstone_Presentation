@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="960" viewBox="0 0 1600 960" style="max-width:100%;height:auto;display:block" role="img" aria-labelledby="title description">
+  <title id="title">Imbokodo Bank activity diagram: from transaction to decision</title>
+  <desc id="description">Upload a file and check its rows. Invalid rows go to quarantine. Valid rows are scored and saved. LOW risk needs no routine review. MEDIUM and HIGH risk go to an Analyst, who investigates and records a decision. HIGH risk also triggers a separate team notification. Saved records remain the audit trail.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z" fill="#496779"/></marker>
+    <style>
+      text{font-family:Arial,sans-serif;fill:#123142;text-anchor:middle} .brand{text-anchor:start;fill:#008b83} .heading{font-size:38px;font-weight:700;text-anchor:start} .sub{font-size:24px;fill:#496779;text-anchor:start} .label{font-size:24px;font-weight:700} .detail{font-size:21px;fill:#496779} .route{font-size:21px;font-weight:700} .line{fill:none;stroke:#496779;stroke-width:3;marker-end:url(#arrow)} .node{stroke-width:2} .end{fill:#fff;stroke:#123142;stroke-width:3}
+    </style>
+  </defs>
+  <rect width="1600" height="960" fill="#f7fafc"/>
+  <text class="brand" x="64" y="58" font-size="18" font-weight="700" letter-spacing="2">IMBOKODO BANK · ACTIVITY DIAGRAM</text>
+  <text class="heading" x="64" y="112">From transaction to decision</text>
+  <text class="sub" x="64" y="154">Follow one row. Bad data is separated before scoring.</text>
+  <g aria-label="Receive, validate, score and store">
+    <circle cx="65" cy="250" r="12" fill="#123142"/>
+    <path class="line" d="M77 250H130"/>
+    <rect class="node" x="130" y="205" width="200" height="90" rx="16" fill="#e5eff8" stroke="#4683b4"/>
+    <text class="label" x="230" y="243">Upload CSV</text><text class="detail" x="230" y="274">Check file and rows</text>
+    <path class="line" d="M330 250H370"/>
+    <path class="node" d="M470 175 570 250 470 325 370 250Z" fill="#e1f2ed" stroke="#168b7e"/>
+    <text class="label" x="470" y="243">Valid</text><text class="label" x="470" y="274">row?</text>
+    <path class="line" d="M570 250H690"/><text class="route" x="625" y="231">Yes</text>
+    <rect class="node" x="690" y="205" width="230" height="90" rx="16" fill="#fff2cf" stroke="#bd9228"/>
+    <text class="label" x="805" y="243">Calculate score</text><text class="detail" x="805" y="274">Apply risk rules</text>
+    <path class="line" d="M920 250H1080"/>
+    <rect class="node" x="1080" y="205" width="240" height="90" rx="16" fill="#eae9f7" stroke="#7771ac"/>
+    <text class="label" x="1200" y="243">Save records</text><text class="detail" x="1200" y="274">Transaction and risk</text>
+  </g>
+  <g aria-label="Invalid row path">
+    <path class="line" d="M470 325V405"/><text class="route" x="498" y="374">No</text>
+    <rect class="node" x="330" y="405" width="280" height="85" rx="16" fill="#fbece7" stroke="#c57861"/>
+    <text class="label" x="470" y="440">Quarantine row</text><text class="detail" x="470" y="470">Keep reason for correction</text>
+    <path class="line" d="M330 448H177"/>
+    <circle class="end" cx="160" cy="448" r="16"/><circle cx="160" cy="448" r="9" fill="#123142"/>
+    <text class="detail" x="160" y="491">Row held</text>
+  </g>
+  <g aria-label="Review and decision path">
+    <path class="line" d="M1200 295V565"/>
+    <path class="node" d="M1200 565 1310 650 1200 735 1090 650Z" fill="#fff2cf" stroke="#bd9228"/>
+    <text class="label" x="1200" y="643">Review</text><text class="label" x="1200" y="674">needed?</text>
+    <path class="line" d="M1310 650H1493"/>
+    <text class="route" x="1410" y="625">LOW: no</text>
+    <circle class="end" cx="1510" cy="650" r="16"/><circle cx="1510" cy="650" r="9" fill="#123142"/>
+    <text class="detail" x="1485" y="698">Record retained</text>
+    <path class="line" d="M1090 650H930"/><text class="route" x="1010" y="597">Yes</text><text class="detail" x="1010" y="624">MEDIUM / HIGH</text>
+    <rect class="node" x="680" y="605" width="250" height="90" rx="16" fill="#f0eaf6" stroke="#966aad"/>
+    <text class="label" x="805" y="643">Analyst investigates</text><text class="detail" x="805" y="674">Check evidence and notes</text>
+    <path class="line" d="M680 650H590"/>
+    <rect class="node" x="330" y="605" width="260" height="90" rx="16" fill="#e5edf2" stroke="#496779"/>
+    <text class="label" x="460" y="643">Record decision</text><text class="detail" x="460" y="674">Save reason and history</text>
+    <path class="line" d="M330 650H177"/>
+    <circle class="end" cx="160" cy="650" r="16"/><circle cx="160" cy="650" r="9" fill="#123142"/>
+    <text class="detail" x="160" y="698">Review complete</text>
+  </g>
+  <g aria-label="Independent notification branch">
+    <path class="line" d="M1200 735V802" stroke-dasharray="8 7"/>
+    <rect class="node" x="955" y="802" width="490" height="92" rx="16" fill="#fbece7" stroke="#c57861"/>
+    <text class="label" x="1200" y="839">HIGH only: notify the team</text><text class="detail" x="1200" y="871">Separate alert path. Analyst still decides.</text>
+  </g>
+  <text class="sub" x="64" y="916">The saved records are the audit trail. The alert draws attention.</text>
+</svg>

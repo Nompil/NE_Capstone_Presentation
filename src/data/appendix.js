@@ -212,7 +212,8 @@ export const appendixSlides = [
     type: 'gallery',
     group: 'SHOW',
     images: [
-      { src: 'image-6-1.png', caption: 'Admission, risk and reconciliation activity' },
+      { src: 'activity-overview.svg', caption: 'Activity overview: from transaction to decision' },
+      { src: 'image-6-1.png', caption: 'Original detailed activity diagram for technical questions' },
       { src: 'image-8-1.png', caption: 'Original AWS design; historical status labels' },
       { src: 'image-10-1.png', caption: 'Imbokodo Bank analyst overview' },
       { src: 'image-10-2.png', caption: 'Risk evidence · historical V1 capture' },
