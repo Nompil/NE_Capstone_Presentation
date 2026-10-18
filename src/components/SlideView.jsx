@@ -9,6 +9,7 @@ import { ArchitectureWalkthrough, VerificationSummary } from './PresentationPoli
 import { FlowArrow, IconBadge, VisualIcon, iconForLabel } from './VisualIcons.jsx';
 import { analystWireframeSource } from '../data/references.js';
 import { ProjectContribution, LearningOutcomes } from './Refinement.jsx';
+import { EmailEvidenceLauncher } from './EmailEvidence.jsx';
 
 function PageMarker({ slide, number, total, appendixTotal, logoSrc }) {
   const appendixNumber = slide.appendix?.slice(1).padStart(2, '0');
@@ -719,6 +720,7 @@ function SlideBody({ slide, logoSrc, profileSrc, assetBase, onNavigate, qaItems,
               <h3>Cost decisions</h3>
               <ul>{slide.decisions.map((decision) => <li key={decision}>{decision}</li>)}</ul>
             </article>
+            <EmailEvidenceLauncher topic="budget" label="View budget warning emails" active={active} />
             <p className="slide-takeaway">{slide.takeaway}</p>
           </div>
         </div>
@@ -750,6 +752,7 @@ function SlideBody({ slide, logoSrc, profileSrc, assetBase, onNavigate, qaItems,
               </article>
             ))}
           </div>
+          <EmailEvidenceLauncher topic="support" label="View AWS support acknowledgement" active={active} />
           <p className="slide-takeaway">{slide.takeaway}</p>
         </>
       );

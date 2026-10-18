@@ -7,6 +7,7 @@ import { analystWireframeSource } from '../data/references.js';
 import { projectStatus, releaseEvidence } from '../data/projectStatus.js';
 import { CloudEvidenceLauncher } from './CloudEvidence.jsx';
 import { CurrentErdLauncher } from './CurrentErd.jsx';
+import { EmailEvidenceLauncher } from './EmailEvidence.jsx';
 
 const resourceBase = `${import.meta.env.BASE_URL}resources/`;
 const topics = [
@@ -70,8 +71,12 @@ function SqlEvidence({ active }) {
   return <><p className="technical-lead">PostgreSQL connects transactions, scores, reviews and decision history.</p><div className="technical-split"><div><Flow title="How the records connect" steps={['Customer → Accounts', 'Account → Transactions', 'Transaction → Risk events', 'Review → History']} /><p>Each record has its own ID. Foreign keys link related records, such as an account and its transactions. Checks on amount, currency and source identity help protect the data and prevent the same input being saved twice.</p></div><CurrentErdLauncher preview active={active} label="Explore the current physical ERD" /></div><nav className="technical-tabs" aria-label="SQL source files">{['schema.sql', 'risk_report.sql', 'monthly_summary.sql', 'views.sql', 'procedure.sql'].map((file) => <button key={file} aria-pressed={selected === `sql/${file}`} onClick={() => setSelected(`sql/${file}`)}>{file}</button>)}</nav><Code title={`Project SQL · ${selected}`}>{files?.[selected] || (error ? 'Source unavailable. Inspect the project repository.' : 'Loading source…')}</Code><div className="technical-warning"><strong>What these queries do.</strong> risk_report finds accounts with more than three HIGH transactions in a 30-day period. R2 uses the saved risk level, with HIGH starting at 40; the 70-point fallback supports earlier records. monthly_summary adds movement by currency from a zero starting point. flag_account lets an authorised action record a manual risk flag.</div><p className="technical-caption">Six assessed SQL artefacts include the schema, 200-row seed, CTE report, window query, views and stored function. The seed is local test data, not the cloud ledger. The 100, 75, 65 hand-check verifies movement from zero, not a real bank balance. Separate currencies are not combined. Every view and function has not been re-executed in the live demonstration.</p></>;
 }
 
-function Alerts() {
+function AlertFlow() {
   return <><p className="technical-lead">A HIGH-risk transaction needs attention. How does the right team hear about it?</p><p>The transaction, frozen score and workflow are saved in PostgreSQL first. A DynamoDB update then starts a separate notification path.</p><Flow title="Business flow · save the record first" steps={['Accept transaction', 'Calculate score', 'Commit risk + review', 'Analyst investigates', 'Record decision']} /><Flow title="Alert flow · HIGH risk only" steps={['DynamoDB projection', 'DynamoDB Streams', 'Alert Lambda claims event', 'SES notification', 'Save delivery state']} /><div className="technical-three"><article><h3>LOW · below 20</h3><p>Save the record. No routine review or HIGH-risk alert.</p></article><article><h3>MEDIUM · 20 to 39</h3><p>Create a review for the Analyst.</p></article><article><h3>HIGH · 40 to 100</h3><p>Create a review and trigger the separate alert path.</p></article></div><div className="technical-warning"><strong>The saved record is the audit trail.</strong> A definite send rejection can be retried. An uncertain send result is marked UNKNOWN and checked before resending to avoid duplicate notifications. Failure queues and CloudWatch support investigation.</div><h3>Recorded AWS result</h3><p>Two SES provider message IDs were recorded. Account-level counters showed Send 2 and Delivery 2, with no recorded bounces, rejects or complaints. Inbox receipt remains unconfirmed; aggregate counters do not prove where each message appeared.</p><p>Failure queues are deployed. A live exhausted-retry and redrive drill has not been established.</p><a href={releaseEvidence.alerts} target="_blank" rel="noopener noreferrer">Inspect the SES evidence ↗</a><p className="technical-caption">The deployed handler is alert_delivery.py. The required legacy alert.py module is not the deployed alert handler. Grouping, cooldowns and digests remain future improvements.</p></>;
+}
+
+function Alerts({ active }) {
+  return <><AlertFlow /><EmailEvidenceLauncher topic="ses" label="View SES address verification" active={active} /></>;
 }
 
 function Functions() {
@@ -98,7 +103,7 @@ function Demo({ active }) {
 }
 
 export function TechnicalContent({ topic, active = true, assetBase }) {
-  if (topic === 'alerts') return <Alerts />;
+  if (topic === 'alerts') return <Alerts active={active} />;
   if (topic === 'sql') return <SqlEvidence active={active} />;
   if (topic === 'functions') return <><Functions /><FunctionSource /></>;
   if (topic === 'journey') return <><Journey active={active} /><FunctionSource /></>;
